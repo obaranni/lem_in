@@ -220,6 +220,11 @@ CMakeFiles/lem_in.dir/src/reader_ants.c.o: ../libft/inc/get_next_line.h
 CMakeFiles/lem_in.dir/src/reader_ants.c.o: ../libft/inc/libft.h
 CMakeFiles/lem_in.dir/src/reader_ants.c.o: ../src/reader_ants.c
 
+CMakeFiles/lem_in.dir/src/reader_links.c.o: ../inc/lem_in.h
+CMakeFiles/lem_in.dir/src/reader_links.c.o: ../libft/inc/get_next_line.h
+CMakeFiles/lem_in.dir/src/reader_links.c.o: ../libft/inc/libft.h
+CMakeFiles/lem_in.dir/src/reader_links.c.o: ../src/reader_links.c
+
 CMakeFiles/lem_in.dir/src/reader_room.c.o: ../inc/lem_in.h
 CMakeFiles/lem_in.dir/src/reader_room.c.o: ../libft/inc/get_next_line.h
 CMakeFiles/lem_in.dir/src/reader_room.c.o: ../libft/inc/libft.h

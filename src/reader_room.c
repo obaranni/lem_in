@@ -39,7 +39,7 @@ int 		valid_room_name(t_read *r, char *name, t_lem *l)
 		}
 		i++;
 	}
-	if (i > 11)
+	if (i > 11)	// ???
 	{
 		set_error(r, "Room name must not exceed 10", r->i + 1, ERR);
 		return (1);
@@ -75,10 +75,11 @@ int 		is_it_room(t_read *r)
 		i++;
 	free_str_arr(strs);
 	if (i == 3)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
+// proverky na 'L'
 int 		valid_room(t_read *r, t_lem *l)
 {
 	char 	**strs;
@@ -87,7 +88,7 @@ int 		valid_room(t_read *r, t_lem *l)
 	if (is_it_room(r))
 	{
 		set_error(r, "Invalid room", r->i + 1, ERR);
-		return (1);
+		return (0);
 	}
 	if (valid_room_name(r, strs[0], l) ||
 		valid_room_coord(r, ft_atoi(strs[1]), ft_atoi(strs[2]), l))

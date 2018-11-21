@@ -6,17 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/Users/macbookpro/projects/lem_in/inc/lem_in.h
+/Users/obaranni/projects/lem_in/inc/lem_in.h
 ../libft/inc/libft.h
-/Users/macbookpro/projects/lem_in/libft/inc/libft.h
+/Users/obaranni/projects/lem_in/libft/inc/libft.h
 ../libft/inc/get_next_line.h
-/Users/macbookpro/projects/lem_in/libft/inc/get_next_line.h
+/Users/obaranni/projects/lem_in/libft/inc/get_next_line.h
 stdio.h
 -
+stdlib.h
+/Users/obaranni/projects/lem_in/inc/stdlib.h
 
-/Users/macbookpro/projects/lem_in/libft/inc/get_next_line.h
+/Users/obaranni/projects/lem_in/libft/inc/get_next_line.h
 
-/Users/macbookpro/projects/lem_in/libft/inc/libft.h
+/Users/obaranni/projects/lem_in/libft/inc/libft.h
 stdlib.h
 -
 unistd.h
@@ -24,7 +26,7 @@ unistd.h
 string.h
 -
 
-/Users/macbookpro/projects/lem_in/src/reader.c
+/Users/obaranni/projects/lem_in/src/reader_room.c
 ../inc/lem_in.h
-/Users/macbookpro/projects/lem_in/inc/lem_in.h
+/Users/obaranni/projects/lem_in/inc/lem_in.h
 

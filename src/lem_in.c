@@ -1,8 +1,8 @@
 #include "../inc/lem_in.h"
 
-int 		is_enough_data()
+int 		is_enough_data(t_lem *l)
 {
-	if (1)
+	if (!l->read->ants_readed || l->start)
 	{
 		ft_putendl("Enough. Continue execution...");
 		return (1);
@@ -33,7 +33,10 @@ int 		is_it_error(t_lem *l)
 		ft_putstr("Error message: ");
 		ft_putendl(l->read->error.err_msg);
 	}
+	else
+		ft_putendl("({[no errors]})");
 	ft_putendl("Terminating program");
+	is_enough_data(l);
 	return (1);
 }
 

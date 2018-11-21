@@ -17,7 +17,7 @@ add_executable(lem_in
         libft/src/ft_isalpha.c
         libft/src/ft_isascii.c
         libft/src/ft_isdigit.c
-        libft/src/ft_isprint.cr
+        libft/src/ft_isprint.c
         libft/src/ft_itoa.c
         libft/src/ft_lstadd.c
         libft/src/ft_lstdel.c
@@ -75,4 +75,4 @@ add_executable(lem_in
         libft/src/ft_tolower.c
         libft/src/ft_toupper.c
         libft/src/get_next_line.c
-        src/lem_in.c src/reader.c src/set_error.c src/reader_room.c src/reader_ants.c src/free.c src/add_room.c)
+        src/lem_in.c src/reader.c src/set_error.c src/reader_room.c src/reader_ants.c src/free.c src/add_room.c src/reader_links.c)

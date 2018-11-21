@@ -6,7 +6,7 @@
 #    By: obaranni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/27 15:44:29 by obaranni          #+#    #+#              #
-#    Updated: 2018/10/23 13:19:12 by obaranni         ###   ########.fr        #
+#    Updated: 2018/11/21 18:20:05 by obaranni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,19 +23,13 @@ LIB_DIR = ./libft/
 LIBFT = $(LIB_DIR)libft.a
 
 SRC =		lem_in.c					\
-#			free.c						\
-			reader/reader.c				\
-			validator/validator.c		\
-			analizer/analizer.c			\
-			responder/responder.c		\
-			visualizer/visualizer.c		\
-			parser/parser.c				\
-			parser/parse_figure.c    	\
-			parser/parse_map.c			\
-			analizer/set_priorities.c   \
-			analizer/brute_force.c		\
-			parser/cut_figure.c			\
-			journalist/logbook.c		\
+			add_room.c					\
+			reader.c					\
+			free.c						\
+			reader_links.c				\
+			set_error.c					\
+			reader_ants.c				\
+			reader_room.c				
 
 OBJ = $(SRC:.c=.o)
 
@@ -61,13 +55,6 @@ $(OBJ_FILES): | $(OBJ_DIR)
 
 $(OBJ_DIR):
 	mkdir obj
-	mkdir obj/reader
-	mkdir obj/validator
-	mkdir obj/visualizer
-	mkdir obj/analizer
-	mkdir obj/responder
-	mkdir obj/parser
-	mkdir obj/journalist
 
 $(LIBFT):
 	make -C $(LIB_DIR)

@@ -71,6 +71,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/lem_in.dir/src/reader_ants.c.o"
   "CMakeFiles/lem_in.dir/src/free.c.o"
   "CMakeFiles/lem_in.dir/src/add_room.c.o"
+  "CMakeFiles/lem_in.dir/src/reader_links.c.o"
   "lem_in.pdb"
   "lem_in"
 )
