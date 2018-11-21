@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/obaranni/projects/lem_in
+CMAKE_SOURCE_DIR = /Users/macbookpro/projects/lem_in
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/obaranni/projects/lem_in/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/macbookpro/projects/lem_in/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/obaranni/projects/lem_in/cmake-build-debug/CMakeFiles /Users/obaranni/projects/lem_in/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbookpro/projects/lem_in/cmake-build-debug/CMakeFiles /Users/macbookpro/projects/lem_in/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/obaranni/projects/lem_in/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbookpro/projects/lem_in/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -1878,6 +1878,60 @@ libft/src/get_next_line.c.s:
 	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/libft/src/get_next_line.c.s
 .PHONY : libft/src/get_next_line.c.s
 
+src/add_room.o: src/add_room.c.o
+
+.PHONY : src/add_room.o
+
+# target to build an object file
+src/add_room.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/add_room.c.o
+.PHONY : src/add_room.c.o
+
+src/add_room.i: src/add_room.c.i
+
+.PHONY : src/add_room.i
+
+# target to preprocess a source file
+src/add_room.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/add_room.c.i
+.PHONY : src/add_room.c.i
+
+src/add_room.s: src/add_room.c.s
+
+.PHONY : src/add_room.s
+
+# target to generate assembly for a file
+src/add_room.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/add_room.c.s
+.PHONY : src/add_room.c.s
+
+src/free.o: src/free.c.o
+
+.PHONY : src/free.o
+
+# target to build an object file
+src/free.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/free.c.o
+.PHONY : src/free.c.o
+
+src/free.i: src/free.c.i
+
+.PHONY : src/free.i
+
+# target to preprocess a source file
+src/free.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/free.c.i
+.PHONY : src/free.c.i
+
+src/free.s: src/free.c.s
+
+.PHONY : src/free.s
+
+# target to generate assembly for a file
+src/free.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/free.c.s
+.PHONY : src/free.c.s
+
 src/lem_in.o: src/lem_in.c.o
 
 .PHONY : src/lem_in.o
@@ -1904,6 +1958,114 @@ src/lem_in.s: src/lem_in.c.s
 src/lem_in.c.s:
 	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/lem_in.c.s
 .PHONY : src/lem_in.c.s
+
+src/reader.o: src/reader.c.o
+
+.PHONY : src/reader.o
+
+# target to build an object file
+src/reader.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/reader.c.o
+.PHONY : src/reader.c.o
+
+src/reader.i: src/reader.c.i
+
+.PHONY : src/reader.i
+
+# target to preprocess a source file
+src/reader.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/reader.c.i
+.PHONY : src/reader.c.i
+
+src/reader.s: src/reader.c.s
+
+.PHONY : src/reader.s
+
+# target to generate assembly for a file
+src/reader.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/reader.c.s
+.PHONY : src/reader.c.s
+
+src/reader_ants.o: src/reader_ants.c.o
+
+.PHONY : src/reader_ants.o
+
+# target to build an object file
+src/reader_ants.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/reader_ants.c.o
+.PHONY : src/reader_ants.c.o
+
+src/reader_ants.i: src/reader_ants.c.i
+
+.PHONY : src/reader_ants.i
+
+# target to preprocess a source file
+src/reader_ants.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/reader_ants.c.i
+.PHONY : src/reader_ants.c.i
+
+src/reader_ants.s: src/reader_ants.c.s
+
+.PHONY : src/reader_ants.s
+
+# target to generate assembly for a file
+src/reader_ants.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/reader_ants.c.s
+.PHONY : src/reader_ants.c.s
+
+src/reader_room.o: src/reader_room.c.o
+
+.PHONY : src/reader_room.o
+
+# target to build an object file
+src/reader_room.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/reader_room.c.o
+.PHONY : src/reader_room.c.o
+
+src/reader_room.i: src/reader_room.c.i
+
+.PHONY : src/reader_room.i
+
+# target to preprocess a source file
+src/reader_room.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/reader_room.c.i
+.PHONY : src/reader_room.c.i
+
+src/reader_room.s: src/reader_room.c.s
+
+.PHONY : src/reader_room.s
+
+# target to generate assembly for a file
+src/reader_room.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/reader_room.c.s
+.PHONY : src/reader_room.c.s
+
+src/set_error.o: src/set_error.c.o
+
+.PHONY : src/set_error.o
+
+# target to build an object file
+src/set_error.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/set_error.c.o
+.PHONY : src/set_error.c.o
+
+src/set_error.i: src/set_error.c.i
+
+.PHONY : src/set_error.i
+
+# target to preprocess a source file
+src/set_error.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/set_error.c.i
+.PHONY : src/set_error.c.i
+
+src/set_error.s: src/set_error.c.s
+
+.PHONY : src/set_error.s
+
+# target to generate assembly for a file
+src/set_error.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/src/set_error.c.s
+.PHONY : src/set_error.c.s
 
 # Help Target
 help:
@@ -2109,9 +2271,27 @@ help:
 	@echo "... libft/src/get_next_line.o"
 	@echo "... libft/src/get_next_line.i"
 	@echo "... libft/src/get_next_line.s"
+	@echo "... src/add_room.o"
+	@echo "... src/add_room.i"
+	@echo "... src/add_room.s"
+	@echo "... src/free.o"
+	@echo "... src/free.i"
+	@echo "... src/free.s"
 	@echo "... src/lem_in.o"
 	@echo "... src/lem_in.i"
 	@echo "... src/lem_in.s"
+	@echo "... src/reader.o"
+	@echo "... src/reader.i"
+	@echo "... src/reader.s"
+	@echo "... src/reader_ants.o"
+	@echo "... src/reader_ants.i"
+	@echo "... src/reader_ants.s"
+	@echo "... src/reader_room.o"
+	@echo "... src/reader_room.i"
+	@echo "... src/reader_room.s"
+	@echo "... src/set_error.o"
+	@echo "... src/set_error.i"
+	@echo "... src/set_error.s"
 .PHONY : help
 
 

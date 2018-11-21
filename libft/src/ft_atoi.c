@@ -38,7 +38,7 @@ int					ft_atoi(const char *str)
 
 	flag = 0;
 	i = 0;
-	if (*str == 0 || str == 0)
+	if (str == 0 || *str == 0)
 		return (0);
 	while (str[i] && (str[i] == '\r' || str[i] == '\v' ||
 		str[i] == '\f' || str[i] == '\n' || str[i] == ' ' || str[i] == '\t'))

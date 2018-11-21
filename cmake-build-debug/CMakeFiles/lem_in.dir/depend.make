@@ -195,7 +195,38 @@ CMakeFiles/lem_in.dir/libft/src/get_next_line.c.o: ../libft/inc/get_next_line.h
 CMakeFiles/lem_in.dir/libft/src/get_next_line.c.o: ../libft/inc/libft.h
 CMakeFiles/lem_in.dir/libft/src/get_next_line.c.o: ../libft/src/get_next_line.c
 
+CMakeFiles/lem_in.dir/src/add_room.c.o: ../inc/lem_in.h
+CMakeFiles/lem_in.dir/src/add_room.c.o: ../libft/inc/get_next_line.h
+CMakeFiles/lem_in.dir/src/add_room.c.o: ../libft/inc/libft.h
+CMakeFiles/lem_in.dir/src/add_room.c.o: ../src/add_room.c
+
+CMakeFiles/lem_in.dir/src/free.c.o: ../inc/lem_in.h
+CMakeFiles/lem_in.dir/src/free.c.o: ../libft/inc/get_next_line.h
+CMakeFiles/lem_in.dir/src/free.c.o: ../libft/inc/libft.h
+CMakeFiles/lem_in.dir/src/free.c.o: ../src/free.c
+
 CMakeFiles/lem_in.dir/src/lem_in.c.o: ../inc/lem_in.h
+CMakeFiles/lem_in.dir/src/lem_in.c.o: ../libft/inc/get_next_line.h
 CMakeFiles/lem_in.dir/src/lem_in.c.o: ../libft/inc/libft.h
 CMakeFiles/lem_in.dir/src/lem_in.c.o: ../src/lem_in.c
+
+CMakeFiles/lem_in.dir/src/reader.c.o: ../inc/lem_in.h
+CMakeFiles/lem_in.dir/src/reader.c.o: ../libft/inc/get_next_line.h
+CMakeFiles/lem_in.dir/src/reader.c.o: ../libft/inc/libft.h
+CMakeFiles/lem_in.dir/src/reader.c.o: ../src/reader.c
+
+CMakeFiles/lem_in.dir/src/reader_ants.c.o: ../inc/lem_in.h
+CMakeFiles/lem_in.dir/src/reader_ants.c.o: ../libft/inc/get_next_line.h
+CMakeFiles/lem_in.dir/src/reader_ants.c.o: ../libft/inc/libft.h
+CMakeFiles/lem_in.dir/src/reader_ants.c.o: ../src/reader_ants.c
+
+CMakeFiles/lem_in.dir/src/reader_room.c.o: ../inc/lem_in.h
+CMakeFiles/lem_in.dir/src/reader_room.c.o: ../libft/inc/get_next_line.h
+CMakeFiles/lem_in.dir/src/reader_room.c.o: ../libft/inc/libft.h
+CMakeFiles/lem_in.dir/src/reader_room.c.o: ../src/reader_room.c
+
+CMakeFiles/lem_in.dir/src/set_error.c.o: ../inc/lem_in.h
+CMakeFiles/lem_in.dir/src/set_error.c.o: ../libft/inc/get_next_line.h
+CMakeFiles/lem_in.dir/src/set_error.c.o: ../libft/inc/libft.h
+CMakeFiles/lem_in.dir/src/set_error.c.o: ../src/set_error.c
 
