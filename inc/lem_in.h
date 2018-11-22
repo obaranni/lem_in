@@ -35,7 +35,6 @@ struct      		s_room
 	char 			*name;
 	int 			x;
 	int 			y;
-	struct s_room	*start;
 	struct s_room	*next;
 
 	t_neigh			*neigh;
@@ -54,13 +53,14 @@ typedef struct		s_read
 	int 			ants_readed;
 	int 			ants;
 	char            **input;
-	char 			*buf;
+	char		*buf;
 	t_err			error;
 }					t_read;
 
 typedef struct      s_lem
 {
 	t_read			*read;
+	t_room			*head;
  	t_room			*start;
  	t_room			*end;
 }                   t_lem;
@@ -70,8 +70,8 @@ typedef struct      s_lem
 */
 
 int					is_it_room(t_read *r);
-void				add_room(t_lem *l, char **room);
-int					valid_room(t_read *r, t_lem *l);
+void				add_room(t_lem *l, char **room, int is_spec);
+int					invalid_room(t_read *r, t_lem *l, int is_spec);
 int					read_room(t_read *r, char which);
 
 int 				is_it_link(t_read *r);
@@ -82,6 +82,7 @@ int					read_ants(t_read *r);
 void				free_str_arr(char **strs);
 void 				set_error(t_read *r, char *err_msg, int err_line, int err_lvl);
 
+void				add_to_input(t_read *r);
 int 				reader(t_lem *l);
 
 #endif

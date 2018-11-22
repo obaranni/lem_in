@@ -11,7 +11,7 @@ int 		is_it_ants(t_read *r)
 		{
 			if (!ft_isdigit(*box))
 			{
-				free(r->buf);
+//				free(r->buf);
 				return (0);
 			}
 			box++;

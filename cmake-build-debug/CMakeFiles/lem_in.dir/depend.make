@@ -195,6 +195,9 @@ CMakeFiles/lem_in.dir/libft/src/get_next_line.c.o: ../libft/inc/get_next_line.h
 CMakeFiles/lem_in.dir/libft/src/get_next_line.c.o: ../libft/inc/libft.h
 CMakeFiles/lem_in.dir/libft/src/get_next_line.c.o: ../libft/src/get_next_line.c
 
+CMakeFiles/lem_in.dir/libft/src/gnl.c.o: ../libft/inc/libft.h
+CMakeFiles/lem_in.dir/libft/src/gnl.c.o: ../libft/src/gnl.c
+
 CMakeFiles/lem_in.dir/src/add_room.c.o: ../inc/lem_in.h
 CMakeFiles/lem_in.dir/src/add_room.c.o: ../libft/inc/get_next_line.h
 CMakeFiles/lem_in.dir/src/add_room.c.o: ../libft/inc/libft.h

@@ -2,6 +2,7 @@
 
 int 		read_room(t_read *r, char which)
 {
+	add_to_input(r);
 	get_next_line(0, &r->buf);
 	if (ft_strlen(r->buf) < 5)
 	{
@@ -9,21 +10,22 @@ int 		read_room(t_read *r, char which)
 			set_error(r, "Absent START room", r->i + 1, ERR);
 		else
 			set_error(r, "Absent END room", r->i + 1, ERR);
-		return (0);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
-int 		valid_room_name(t_read *r, char *name, t_lem *l)
+int 		invalid_room_name(t_read *r, char *name, t_lem *l)
 {
 	t_room	*tmp;
 	int 	i;
 
 	i = 0;
-	tmp = l->start;
+
+	tmp = l->head;
 	while (tmp)
 	{
-		if (ft_strcmp(tmp->name, name))
+		if (!ft_strcmp(tmp->name, name))
 		{
 			set_error(r, "Room with same name exist", r->i + 1, ERR);
 			return (1);
@@ -47,11 +49,11 @@ int 		valid_room_name(t_read *r, char *name, t_lem *l)
 	return (0);
 }
 
-int 		valid_room_coord(t_read *r, int x, int y, t_lem *l)
+int 		invalid_room_coord(t_read *r, int x, int y, t_lem *l)
 {
 	t_room	*tmp;
 
-	tmp = l->start;
+	tmp = l->head;
 	while (tmp)
 	{
 		if (tmp->x == x && tmp->y == y)
@@ -68,32 +70,38 @@ int 		is_it_room(t_read *r)
 {
 	int		i;
 	char 	**strs;
+	char 	*tofree;
 
-	strs = ft_strsplit(r->buf, ' ');
+	tofree = ft_strdup(r->buf);
+	strs = ft_strsplit(tofree, ' ');
+	free(tofree);
 	i = 0;
+	if (!strs)
+	{
+		set_error(r, "Garbage instead of room", r->i + 1, ERR);
+		return (0);
+	}
 	while (strs[i])
 		i++;
-	free_str_arr(strs);
+	//free_str_arr(strs);
 	if (i == 3)
-		return (0);
-	return (1);
+		return (1);
+	ft_putendl(ft_strjoin("ZALUPA ", strs[0]));
+	set_error(r, "It does not look like a room", r->i + 1, ERR);
+	return (0);
 }
 
 // proverky na 'L'
-int 		valid_room(t_read *r, t_lem *l)
+int 		invalid_room(t_read *r, t_lem *l, int is_spec)
 {
 	char 	**strs;
 
-	strs = ft_strsplit(r->buf, ' ');
-	if (is_it_room(r))
-	{
-		set_error(r, "Invalid room", r->i + 1, ERR);
-		return (0);
-	}
-	if (valid_room_name(r, strs[0], l) ||
-		valid_room_coord(r, ft_atoi(strs[1]), ft_atoi(strs[2]), l))
+	if (!is_it_room(r))
 		return (1);
-	add_room(l, strs);
-	//free(strs);
+	strs = ft_strsplit(r->buf, ' ');
+	if (invalid_room_name(r, strs[0], l) ||
+			invalid_room_coord(r, ft_atoi(strs[1]), ft_atoi(strs[2]), l))
+		return (1);
+	add_room(l, strs, is_spec);
 	return (0);
 }

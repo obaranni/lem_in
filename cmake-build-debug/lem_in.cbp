@@ -46,6 +46,7 @@
 				<Compiler>
 					<Add directory="/Users/obaranni/projects/lem_in/inc"/>
 					<Add directory="/Users/obaranni/projects/lem_in/libft/inc"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
@@ -69,6 +70,7 @@
 				<Compiler>
 					<Add directory="/Users/obaranni/projects/lem_in/inc"/>
 					<Add directory="/Users/obaranni/projects/lem_in/libft/inc"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
@@ -84,7 +86,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/obaranni/projects/lem_in/Makefile">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/author">
+			<Option target="lem_in"/>
+		</Unit>
 		<Unit filename="/Users/obaranni/projects/lem_in/inc/lem_in.h">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/libft/Makefile">
 			<Option target="lem_in"/>
 		</Unit>
 		<Unit filename="/Users/obaranni/projects/lem_in/libft/inc/get_next_line.h">
@@ -288,6 +299,9 @@
 		<Unit filename="/Users/obaranni/projects/lem_in/libft/src/get_next_line.c">
 			<Option target="lem_in"/>
 		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/libft/src/gnl.c">
+			<Option target="lem_in"/>
+		</Unit>
 		<Unit filename="/Users/obaranni/projects/lem_in/src/add_room.c">
 			<Option target="lem_in"/>
 		</Unit>
@@ -310,6 +324,102 @@
 			<Option target="lem_in"/>
 		</Unit>
 		<Unit filename="/Users/obaranni/projects/lem_in/src/set_error.c">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/error_input_cases">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid1">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid10">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid11">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid12">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid13">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid14">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid15">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid16">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid17">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid18">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid19">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid2">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid3">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid4">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid5">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid6">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid7">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid8">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/invalid9">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid1">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid10">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid11">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid12">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid2">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid3">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid4">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid5">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid6">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid7">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid8">
+			<Option target="lem_in"/>
+		</Unit>
+		<Unit filename="/Users/obaranni/projects/lem_in/testing_files/valid9">
 			<Option target="lem_in"/>
 		</Unit>
 		<Unit filename="/Users/obaranni/projects/lem_in/CMakeLists.txt">

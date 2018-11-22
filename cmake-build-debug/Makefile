@@ -1878,6 +1878,33 @@ libft/src/get_next_line.c.s:
 	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/libft/src/get_next_line.c.s
 .PHONY : libft/src/get_next_line.c.s
 
+libft/src/gnl.o: libft/src/gnl.c.o
+
+.PHONY : libft/src/gnl.o
+
+# target to build an object file
+libft/src/gnl.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/libft/src/gnl.c.o
+.PHONY : libft/src/gnl.c.o
+
+libft/src/gnl.i: libft/src/gnl.c.i
+
+.PHONY : libft/src/gnl.i
+
+# target to preprocess a source file
+libft/src/gnl.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/libft/src/gnl.c.i
+.PHONY : libft/src/gnl.c.i
+
+libft/src/gnl.s: libft/src/gnl.c.s
+
+.PHONY : libft/src/gnl.s
+
+# target to generate assembly for a file
+libft/src/gnl.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/libft/src/gnl.c.s
+.PHONY : libft/src/gnl.c.s
+
 src/add_room.o: src/add_room.c.o
 
 .PHONY : src/add_room.o
@@ -2298,6 +2325,9 @@ help:
 	@echo "... libft/src/get_next_line.o"
 	@echo "... libft/src/get_next_line.i"
 	@echo "... libft/src/get_next_line.s"
+	@echo "... libft/src/gnl.o"
+	@echo "... libft/src/gnl.i"
+	@echo "... libft/src/gnl.s"
 	@echo "... src/add_room.o"
 	@echo "... src/add_room.i"
 	@echo "... src/add_room.s"

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(lem_in C)
+project(lem_in)
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_STANDARD 14)
 
 include_directories(inc)
 include_directories(libft/inc)
@@ -75,4 +75,46 @@ add_executable(lem_in
         libft/src/ft_tolower.c
         libft/src/ft_toupper.c
         libft/src/get_next_line.c
-        src/lem_in.c src/reader.c src/set_error.c src/reader_room.c src/reader_ants.c src/free.c src/add_room.c src/reader_links.c)
+        libft/Makefile
+        src/add_room.c
+        src/free.c
+        src/lem_in.c
+        src/reader.c
+        src/reader_ants.c
+        src/reader_links.c
+        src/reader_room.c
+        src/set_error.c
+        testing_files/error_input_cases
+        testing_files/invalid1
+        testing_files/invalid10
+        testing_files/invalid11
+        testing_files/invalid12
+        testing_files/invalid13
+        testing_files/invalid14
+        testing_files/invalid15
+        testing_files/invalid16
+        testing_files/invalid17
+        testing_files/invalid18
+        testing_files/invalid19
+        testing_files/invalid2
+        testing_files/invalid3
+        testing_files/invalid4
+        testing_files/invalid5
+        testing_files/invalid6
+        testing_files/invalid7
+        testing_files/invalid8
+        testing_files/invalid9
+        testing_files/valid1
+        testing_files/valid10
+        testing_files/valid11
+        testing_files/valid12
+        testing_files/valid2
+        testing_files/valid3
+        testing_files/valid4
+        testing_files/valid5
+        testing_files/valid6
+        testing_files/valid7
+        testing_files/valid8
+        testing_files/valid9
+        author
+        Makefile libft/src/gnl.c)
