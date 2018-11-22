@@ -26,21 +26,21 @@ int 		valid(t_read *r, t_lem *l)
 	}
 	else if (!ft_strcmp(r->buf, START))
 	{
-		if (read_room(r, START[2]))
-			if (valid_room(r, l))
+		if (!read_room(r, START[2]))
+			if (!invalid_room(r, l))
 				return (1);
 	}
 	else if (!ft_strcmp(r->buf, END))
 	{
-		if (read_room(r, END[2]))
-			if (valid_room(r, l))
+		if (!read_room(r, END[2]))
+			if (!invalid_room(r, l))
 				return (1);
 	}
 	else if (r->buf[0] == '#')
 		add_to_input(r);
 	else if (is_it_room(r))
 	{
-		if (valid_room(r, l))
+		if (!invalid_room(r, l))
 			return (1);
 	}
 	return (0);
@@ -58,6 +58,7 @@ int         reader(t_lem *l)
 	l->read = r;
 	l->start = 0;
 	l->end = 0;
+	l->head = 0;
 	r->i = 0;
 	r->input = (char **)malloc(sizeof(char*) * MAX);
 	while (r->i < MAX && get_next_line(0, &r->buf))

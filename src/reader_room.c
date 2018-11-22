@@ -9,12 +9,14 @@ int 		read_room(t_read *r, char which)
 			set_error(r, "Absent START room", r->i + 1, ERR);
 		else
 			set_error(r, "Absent END room", r->i + 1, ERR);
-		return (0);
+		return (1);
 	}
-	return (1);
+	if (r->buf[0])
+		add_to_input(r);
+	return (0);
 }
 
-int 		valid_room_name(t_read *r, char *name, t_lem *l)
+int 		invalid_room_name(t_read *r, char *name, t_lem *l)
 {
 	t_room	*tmp;
 	int 	i;
@@ -47,7 +49,7 @@ int 		valid_room_name(t_read *r, char *name, t_lem *l)
 	return (0);
 }
 
-int 		valid_room_coord(t_read *r, int x, int y, t_lem *l)
+int 		invalid_room_coord(t_read *r, int x, int y, t_lem *l)
 {
 	t_room	*tmp;
 
@@ -75,23 +77,27 @@ int 		is_it_room(t_read *r)
 		i++;
 	free_str_arr(strs);
 	if (i == 3)
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }
 
 // proverky na 'L'
-int 		valid_room(t_read *r, t_lem *l)
+int 		invalid_room(t_read *r, t_lem *l)
 {
 	char 	**strs;
 
 	strs = ft_strsplit(r->buf, ' ');
-	if (is_it_room(r))
+	if (!is_it_room(r))
 	{
 		set_error(r, "Invalid room", r->i + 1, ERR);
-		return (0);
+		return (1);
 	}
-	if (valid_room_name(r, strs[0], l) ||
-		valid_room_coord(r, ft_atoi(strs[1]), ft_atoi(strs[2]), l))
+//	if (!strs[1] || !strs[2])
+//	{
+//		set_error(r, "Invalid room", r->i + 1, ERR);
+//	}
+	if (invalid_room_name(r, strs[0], l) ||
+			invalid_room_coord(r, ft_atoi(strs[1]), ft_atoi(strs[2]), l))
 		return (1);
 	add_room(l, strs);
 	//free(strs);

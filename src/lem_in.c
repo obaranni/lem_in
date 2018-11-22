@@ -3,17 +3,18 @@
 int 		is_enough_data(t_lem *l)
 {
 	if (!l->read->ants_readed || l->start)
-	{
-		ft_putendl("Enough. Continue execution...");
-		return (1);
-	}
-	else
-		ft_putendl("Missing ? !!!");
+		set_error(l->read, "Ants quantity are absent", l->read->i + 1, 2);
+	else if (!l->start)
+		set_error(l->read, "Start room are absent", l->read->i + 1, 2);
+	else if (!l->end)
+		set_error(l->read, "End room are absent", l->read->i + 1, 2);
 	return (0);
 }
 
 int 		is_it_error(t_lem *l)
 {
+	if (l->read->error.err_lvl != 2)
+		is_enough_data(l);
 	if (l->read->error.err_lvl == 1)
 	{
 		ft_putstr("Lite error at line ");
@@ -22,8 +23,6 @@ int 		is_it_error(t_lem *l)
 		ft_putstr("Error message: ");
 		ft_putendl(l->read->error.err_msg);
 		ft_putendl("The program will continue execution if the received data is sufficient.\nRevision...");
-		if (is_enough_data())
-			return (0);
 	}
 	else if (l->read->error.err_lvl == 2)
 	{
@@ -36,7 +35,6 @@ int 		is_it_error(t_lem *l)
 	else
 		ft_putendl("({[no errors]})");
 	ft_putendl("Terminating program");
-	is_enough_data(l);
 	return (1);
 }
 

@@ -6,19 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/Users/obaranni/projects/lem_in/inc/lem_in.h
+/Users/macbookpro/projects/lem_in/inc/lem_in.h
 ../libft/inc/libft.h
-/Users/obaranni/projects/lem_in/libft/inc/libft.h
+/Users/macbookpro/projects/lem_in/libft/inc/libft.h
 ../libft/inc/get_next_line.h
-/Users/obaranni/projects/lem_in/libft/inc/get_next_line.h
+/Users/macbookpro/projects/lem_in/libft/inc/get_next_line.h
 stdio.h
 -
 stdlib.h
-/Users/obaranni/projects/lem_in/inc/stdlib.h
+/Users/macbookpro/projects/lem_in/inc/stdlib.h
 
-/Users/obaranni/projects/lem_in/libft/inc/get_next_line.h
+/Users/macbookpro/projects/lem_in/libft/inc/get_next_line.h
 
-/Users/obaranni/projects/lem_in/libft/inc/libft.h
+/Users/macbookpro/projects/lem_in/libft/inc/libft.h
 stdlib.h
 -
 unistd.h
@@ -26,7 +26,35 @@ unistd.h
 string.h
 -
 
-/Users/obaranni/projects/lem_in/src/reader_room.c
+/Users/macbookpro/projects/lem_in/src/add_room.c
 ../inc/lem_in.h
-/Users/obaranni/projects/lem_in/inc/lem_in.h
+/Users/macbookpro/projects/lem_in/inc/lem_in.h
+
+/Users/macbookpro/projects/lem_in/src/free.c
+../inc/lem_in.h
+/Users/macbookpro/projects/lem_in/inc/lem_in.h
+
+/Users/macbookpro/projects/lem_in/src/lem_in.c
+../inc/lem_in.h
+/Users/macbookpro/projects/lem_in/inc/lem_in.h
+
+/Users/macbookpro/projects/lem_in/src/reader.c
+../inc/lem_in.h
+/Users/macbookpro/projects/lem_in/inc/lem_in.h
+
+/Users/macbookpro/projects/lem_in/src/reader_ants.c
+../inc/lem_in.h
+/Users/macbookpro/projects/lem_in/inc/lem_in.h
+
+/Users/macbookpro/projects/lem_in/src/reader_links.c
+../inc/lem_in.h
+/Users/macbookpro/projects/lem_in/inc/lem_in.h
+
+/Users/macbookpro/projects/lem_in/src/reader_room.c
+../inc/lem_in.h
+/Users/macbookpro/projects/lem_in/inc/lem_in.h
+
+/Users/macbookpro/projects/lem_in/src/set_error.c
+../inc/lem_in.h
+/Users/macbookpro/projects/lem_in/inc/lem_in.h
 
