@@ -22,7 +22,12 @@ int 		is_it_ants(t_read *r)
 
 int			read_ants(t_read *r)
 {
+	if (r->ants_readed)
+	{
+		set_error(r, "Ants already readed!", r->i + 1, ERR);
+		return (0);
+	}
 	r->ants = ft_atoi(r->buf);
 	r->ants_readed = 1;
-	return (0);
+	return (1);
 }

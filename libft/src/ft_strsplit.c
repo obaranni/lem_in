@@ -3,68 +3,117 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: obaranni chestno eto ya <oleksandr32riabyi@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/11 15:28:24 by obaranni          #+#    #+#             */
-/*   Updated: 2018/08/02 15:39:46 by obaranni         ###   ########.fr       */
+/*   Created: 2017/11/16 09:29:41 by ariabyi           #+#    #+#             */
+/*   Updated: 2017/11/27 14:38:26 by ariabyi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-static size_t		ft_count_word(char const *s, char c)
+static int             ft_iswsps(const char *str)
 {
-	size_t	i;
-	size_t	count;
+	size_t x;
 
-	count = 0;
-	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
+	x = 0;
+	if (!str)
+		return (0);
+	while (*str)
 	{
-		while (s[i] == c)
-			i++;
-		if ((i == 1 && s[i] != c) || (s[i] != c && s[i - 1] == c))
-			count++;
-		i++;
+		if (*str != ' ' && *str != '\t')
+			x++;
+		str++;
 	}
-	return (count);
+	return (x == ft_strlen(str));
 }
 
-static int			ft_is_begin_word(char const *s, size_t index, char c)
+static int			c_words(const char *s, char c, int code)
 {
-	if (index == 0 && s[index] != c)
-		return (1);
-	if (s[index] != c && s[index - 1] == c)
-		return (1);
-	return (0);
-}
+	int				i;
+	int				flag;
+	int				count_words;
 
-char				**ft_strsplit(char const *s, char c)
-{
-	size_t	i;
-	size_t	j;
-	size_t	k;
-	char	**tab;
-
-
-	i = 0;
-	k = 0;
-	if ((tab = (char **)malloc(sizeof(char *) * ft_count_word(s, c))) == NULL)
-		return (NULL);
-	if (ft_count_word(s, c) == 0)
-		return (tab);
-	while (s[i] == c)
-		i++;
+	flag = 0;
+	count_words = 0;
+	if (!s || (i = 0))
+		return (0);
 	while (s[i])
 	{
-		j = 0;
-		if (ft_is_begin_word(s, i, c))
+		while (s[i] && (s[i] == c ||
+						(code == 1 && (s[i] == ' ' || s[i] == '\t'))))
 		{
-			while (s[i + j] != c && (s[i + j] != '\0' && s[i + j] != '\n'))
-				j++;
-			tab[k++] = ft_strsub(s, i, j);
+			i++;
+			flag = 0;
 		}
+		while (s[i] && ((s[i] != c && !code) ||
+						(code == 1 && (s[i] != ' ' && s[i] != '\t' && s[i] != c))))
+		{
+			i++;
+			if (flag == 0 && (flag = 1))
+				count_words++;
+		}
+	}
+	return (count_words);
+}
+
+static size_t		len_split(const char **string, char c, int code)
+{
+	char			*wip;
+	int				i;
+	size_t			ret;
+
+	if (!(*string))
+		return (0);
+	wip = (char *)*string;
+	i = 0;
+	ret = 0;
+	while (wip[i] && (wip[i] == c ||
+					  (code == 1 && (wip[i] == ' ' || wip[i] == '\t'))))
+		i++;
+	while (wip[i] && ((wip[i] != c && !code) ||
+					  (code == 1 && (wip[i] != ' ' && wip[i] != '\t' && wip[i] != c))))
+	{
+		ret++;
 		i++;
 	}
-	return (tab);
+	return (ret);
+}
+
+static char			*get_word(const char **string, char c, int code)
+{
+	char			*ret;
+	int				i;
+	int				temp;
+
+	i = 0;
+	if (!(temp = len_split(string, c, code)))
+		return (NULL);
+	ret = ft_strnew(temp);
+	while (**string && (**string == c ||
+						(code == 1 && (**string == ' ' || **string == '\t'))))
+		(*string)++;
+	while (**string && ((**string != c && !code) ||
+						(code == 1 && (**string != ' ' && **string != '\t' && **string != c))))
+	{
+		ret[i++] = **string;
+		(*string)++;
+	}
+	return (ret);
+}
+
+char				**ft_strsplit(const char *string, char c, int code)
+{
+	char			**dest;
+	int				numb_wrds;
+	int				counter;
+
+	if (!string || ft_iswsps(string) || !(numb_wrds = c_words(string, c, code)))
+		return (NULL);
+	counter = 0;
+	dest = (char **)malloc(sizeof(char *) * (numb_wrds + 1));
+	while (numb_wrds--)
+		dest[counter++] = get_word(&string, c, code);
+	dest[counter] = NULL;
+	return (dest);
 }

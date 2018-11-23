@@ -2,6 +2,8 @@
 
 int 		is_enough_data(t_lem *l)
 {
+	// Is #start and #end rooms connected?
+	// Is all room has connections?
 	if (!l->read->ants_readed)
 		set_error(l->read, "Ants quantity are absent", l->read->i + 1, 2);
 	else if (!l->start)
@@ -41,14 +43,15 @@ int 		is_it_error(t_lem *l)
 int			main(void)
 {
 	t_lem	l;
+
     reader(&l);
-//	int i;
-//	i = 0;
-//	while (i < MAX && i < l.read->i)
-//	{
-//		printf("%s\n", l.read->input[i]);
-//		i++;
-//	}
+	int i;
+	i = 0;
+	while (i < MAX_INSTR && i < l.read->i)
+	{
+		printf("%s\n", l.read->input[i]);
+		i++;
+	}
     if (is_it_error(&l))
     {
     	free(l.read->input);

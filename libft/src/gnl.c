@@ -21,14 +21,14 @@ static char			*append_char(char **s, char c)
 	{
 		temp = ft_memalloc(2);
 		temp[0] = c;
-		temp[1] = '\n';
+		temp[1] = '\0';
 		return (temp);
 	}
 	len = ft_strlen(*s);
 	temp = ft_memalloc(len + 2);
 	ft_strcpy(temp, *s);
 	temp[len] = c;
-	temp[len + 1] = '\n';
+	temp[len + 1] = '\0';
 	free(*s);
 	*s = NULL;
 	return (temp);

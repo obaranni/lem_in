@@ -18,7 +18,11 @@
 # include "stdlib.h"
 # define START "##start"
 # define END "##end"
-# define MAX 4096
+# define COMMON_R 0
+# define START_R 1
+# define END_R 2
+# define MAX_INSTR 4096
+# define MAX_NAME_R 11
 # define WAR 1
 # define ERR 2
 
@@ -71,16 +75,17 @@ typedef struct      s_lem
 
 int					is_it_room(t_read *r);
 void				add_room(t_lem *l, char **room, int is_spec);
-int					invalid_room(t_read *r, t_lem *l, int is_spec);
+int					invalid_room(t_lem *l, int is_spec);
 int					read_room(t_read *r, char which);
 
-int 				is_it_link(t_read *r);
+int 				is_it_link(t_lem *l);
+int					invalid_link(t_lem *l);
 
 int					is_it_ants(t_read *r);
 int					read_ants(t_read *r);
 
 void				free_str_arr(char **strs);
-void 				set_error(t_read *r, char *err_msg, int err_line, int err_lvl);
+int 				set_error(t_read *r, char *err_msg, int err_line, int err_lvl);
 
 void				add_to_input(t_read *r);
 int 				reader(t_lem *l);

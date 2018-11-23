@@ -16,33 +16,35 @@ int 		valid(t_read *r, t_lem *l)
 {
 	if (is_it_ants(r))
 	{
-		if (r->ants_readed)
-		{
-			set_error(r, "Ants already readed!", r->i + 1, WAR);
-			return (0);
-		}
-		read_ants(r);
-		return (1);
+		if (read_ants(r))
+			return (1);
 	}
 	else if (!ft_strcmp(r->buf, START))
 	{
 		if (!read_room(r, START[2]))
-			if (!invalid_room(r, l, 1))
+			if (!invalid_room(l, START_R))
 				return (1);
 	}
 	else if (!ft_strcmp(r->buf, END))
 	{
 		if (!read_room(r, END[2]))
-			if (!invalid_room(r, l, 2))
+			if (!invalid_room(l, END_R))
 				return (1);
 	}
 	else if (r->buf[0] == '#')
-		add_to_input(r);
+		return (1);
 	else if (is_it_room(r))
 	{
-		if (!invalid_room(r, l, 0))
+		if (!invalid_room(l, COMMON_R))
 			return (1);
 	}
+	else if (is_it_link(l))
+	{
+		if (!invalid_link(l))
+			return (1);
+	}
+	else
+		return (set_error(r, "123213123", r->i, ERR) - 1);
 	return (0);
 }
 
@@ -61,8 +63,8 @@ int         reader(t_lem *l)
 	l->end = 0;
 	l->head = 0;
 	r->i = 0;
-	r->input = (char **)malloc(sizeof(char*) * MAX);
-	while (r->i < MAX && lgnl(0, &r->buf))
+	r->input = (char **)malloc(sizeof(char*) * MAX_INSTR);
+	while (r->i < MAX_INSTR && lgnl(0, &r->buf))
 	{
 //		ft_putendl(r->buf);
     	if (r->buf[0] && valid(r, l))
