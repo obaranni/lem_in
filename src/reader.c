@@ -38,13 +38,13 @@ int 		valid(t_read *r, t_lem *l)
 		if (!invalid_room(l, COMMON_R))
 			return (1);
 	}
-	else if (is_it_link(l))
+	else if (is_it_link(l, r))
 	{
 		if (!invalid_link(l))
 			return (1);
 	}
-	else
-		return (set_error(r, "123213123", r->i, ERR) - 1);
+//	else
+//		return (set_error(r, "123213123", r->i, ERR) - 1);
 	return (0);
 }
 
@@ -64,6 +64,7 @@ int         reader(t_lem *l)
 	l->head = 0;
 	r->i = 0;
 	r->input = (char **)malloc(sizeof(char*) * MAX_INSTR);
+	// TODO: change MAX_INSTR to reading into one string with \n's
 	while (r->i < MAX_INSTR && lgnl(0, &r->buf))
 	{
 //		ft_putendl(r->buf);

@@ -2,8 +2,6 @@
 
 int 		is_enough_data(t_lem *l)
 {
-	// Is #start and #end rooms connected?
-	// Is all room has connections?
 	if (!l->read->ants_readed)
 		set_error(l->read, "Ants quantity are absent", l->read->i + 1, 2);
 	else if (!l->start)
@@ -35,7 +33,7 @@ int 		is_it_error(t_lem *l)
 		ft_putendl(l->read->error.err_msg);
 	}
 	else
-		ft_putendl("({[no errors]})");
+		ft_putendl("Successful reading!");
 	ft_putendl("Terminating program");
 	return (1);
 }

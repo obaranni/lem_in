@@ -37,14 +37,14 @@ int 		invalid_room_name(t_read *r, char *name, t_lem *l)
 			return (set_error(r, "Room with same name exist", r->i + 1, ERR));
 		tmp = tmp->next;
 	}
-	while (name[i])
-	{
-		if (!ft_isalpha(name[i]) && !ft_isdigit(name[i]))
-			return (set_error(r, "Room name should contain alphabet and digits", r->i + 1, ERR));
-		i++;
-	}
-	if (i > MAX_NAME_R)	// ???
-		return (set_error(r, "Room name must not exceed 10", r->i + 1, ERR));
+//	while (name[i])
+//	{
+//		if (!ft_isalpha(name[i]) && !ft_isdigit(name[i]))
+//			return (set_error(r, "Room name should contain alphabet and digits", r->i + 1, ERR));
+//		i++;
+//	}
+//	if (i > MAX_NAME_R)	// ???
+//		return (set_error(r, "Room name must not exceed 10", r->i + 1, ERR));
 	return (0);
 }
 
@@ -73,21 +73,22 @@ int 		is_it_room(t_read *r)
 	free(tofree);
 	i = 0;
 	if (!strs)
-		return (set_error(r, "Garbage instead of room", r->i + 1, ERR) - 1);
+		return (0);
 	while (strs[i])
 		i++;
 	if (i == 3)
 		return (1);
-	return (set_error(r, "It does not look like a room", r->i + 1, ERR) - 1);
+	return (0);
 }
 
 // proverky na 'L'
+
 int 		invalid_room(t_lem *l, int is_spec)
 {
 	char 	**strs;
 
 	if (!is_it_room(l->read))
-		return (1);
+		return (set_error(l->read, "It does not look like a room", l->read->i + 1, ERR) - 1);
 	strs = ft_strsplit(l->read->buf, ' ', 1);
 	if (invalid_room_name(l->read, strs[0], l) ||
 			invalid_room_coord(l->read, ft_atoi(strs[1]),

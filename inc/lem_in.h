@@ -27,21 +27,21 @@
 # define ERR 2
 
 typedef struct      s_room t_room;
+typedef struct		s_neigh t_neigh;
 
-typedef struct 		s_neigh
+struct				s_neigh
 {
-	t_room			*room;
-	struct s_neigh	*next;
-}					t_neigh;
+	t_room			*origin;
+	t_neigh			*next;
+};
 
 struct      		s_room
 {
 	char 			*name;
 	int 			x;
 	int 			y;
-	struct s_room	*next;
-
-	t_neigh			*neigh;
+	t_neigh			*neighbors;
+	t_room			*next;
 };
 
 typedef struct		s_err
@@ -57,7 +57,9 @@ typedef struct		s_read
 	int 			ants_readed;
 	int 			ants;
 	char            **input;
-	char		*buf;
+	char			*buf;
+	char 			*l_r1;
+	char 			*l_r2;
 	t_err			error;
 }					t_read;
 
@@ -78,7 +80,8 @@ void				add_room(t_lem *l, char **room, int is_spec);
 int					invalid_room(t_lem *l, int is_spec);
 int					read_room(t_read *r, char which);
 
-int 				is_it_link(t_lem *l);
+void				link_rooms(t_room *r1, t_room *r2);
+int 				is_it_link(t_lem *l, t_read *r);
 int					invalid_link(t_lem *l);
 
 int					is_it_ants(t_read *r);
