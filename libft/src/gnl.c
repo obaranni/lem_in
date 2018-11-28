@@ -11,11 +11,15 @@
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
 
-static char			*append_char(char **s, char c)
+
+static char            *append_char(char **s, char c)
 {
-	char			*temp;
-	size_t			len;
+	char            *temp;
+	size_t            len;
 
 	if (!*s)
 	{
@@ -34,18 +38,16 @@ static char			*append_char(char **s, char c)
 	return (temp);
 }
 
-int					lgnl(int fd, char **line)
+int                    lgnl(int fd, char **line)
 {
-	char			buf;
-	ssize_t 		len;
+	char            buf;
 
-	len = 0;
 	if (fd < 0 || !line)
 		return (-1);
 	*line = NULL;
-	while ((len += read(fd, &buf, 1) > 0))
+	while (read(fd, &buf, 1) > 0)
 	{
-		if (buf == '\0' || buf == '\n')
+		if (buf == '\n' || buf == '\0')
 			break ;
 		*line = append_char(line, buf);
 	}

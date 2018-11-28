@@ -10,10 +10,7 @@ int 		is_it_ants(t_read *r)
 		while (*box)
 		{
 			if (!ft_isdigit(*box))
-			{
-//				free(r->buf);
 				return (0);
-			}
 			box++;
 		}
 	}
@@ -27,7 +24,6 @@ int			read_ants(t_read *r)
 		set_error(r, "Ants already readed!", r->i + 1, ERR);
 		return (0);
 	}
-	r->ants = ft_atoi(r->buf);
-	r->ants_readed = 1;
+	r->ants_readed = (unsigned int)ft_atoi(r->buf);
 	return (1);
 }

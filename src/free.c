@@ -12,3 +12,11 @@ void		free_str_arr(char **strs)
 	}
 	free(strs);
 }
+
+void		free_all(t_lem *l)
+{
+	int 	i;
+
+	while (i < )
+	l->read->input
+}

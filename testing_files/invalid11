@@ -2,7 +2,7 @@
 ##start
 st 1 1
 ##end
-en 1 1
-Lt 1 1
+en 1 2
+Lt 1 3
 st-Lt
 Lt-en

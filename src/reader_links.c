@@ -38,13 +38,6 @@ int 		invalid_rooms(char *n1, char *n2, t_lem *l, int set_err)
 	return (1);
 }
 
-/*
- TODO: if all done, add errors/warning list:
- TODO: WAR perhaps not the correct perception of the link, the number of options 4
- TODO: WAR relink rooma-roomb  => roomb-rooma
- TODO: WAR room1-room1
- TODO: read while END, printing all errors
- */
 int					is_it_link(t_lem *l, t_read *r)
 {
 	unsigned int	i;
@@ -85,8 +78,10 @@ t_room		*find_room_byname(t_room *room, char *name)
 
 int 		invalid_link(t_lem *l)
 {
-	// TODO: checks from upper todo
+	if (!is_it_link(l, l->read))
+		return (set_error(l->read, "Invalid link", l->read->i + 1, ERR));
 	link_rooms(find_room_byname(l->head, l->read->l_r1),find_room_byname(l->head, l->read->l_r2));
-
+	free(l->read->l_r1);
+	free(l->read->l_r2);
 	return (0);
 }

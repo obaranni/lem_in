@@ -12,7 +12,7 @@ int			extra_se_room(t_lem *l, int is_spec)
 int 		read_room(t_read *r, char which)
 {
 	add_to_input(r);
-	get_next_line(0, &r->buf);
+	get_next_line(fd, &r->buf);
 	if (ft_strlen(r->buf) < 5)
 	{
 		if (which == 's')
@@ -26,9 +26,6 @@ int 		read_room(t_read *r, char which)
 int 		invalid_room_name(t_read *r, char *name, t_lem *l)
 {
 	t_room	*tmp;
-	int 	i;
-
-	i = 0;
 
 	tmp = l->head;
 	while (tmp)
@@ -37,14 +34,8 @@ int 		invalid_room_name(t_read *r, char *name, t_lem *l)
 			return (set_error(r, "Room with same name exist", r->i + 1, ERR));
 		tmp = tmp->next;
 	}
-//	while (name[i])
-//	{
-//		if (!ft_isalpha(name[i]) && !ft_isdigit(name[i]))
-//			return (set_error(r, "Room name should contain alphabet and digits", r->i + 1, ERR));
-//		i++;
-//	}
-//	if (i > MAX_NAME_R)	// ???
-//		return (set_error(r, "Room name must not exceed 10", r->i + 1, ERR));
+	if (l->vis && ft_strlen(name) > MAX_NAME_R)
+		return (set_error(r, "Room cannot be visualized, to long name", r->i + 1, ERR));
 	return (0);
 }
 
@@ -56,7 +47,7 @@ int 		invalid_room_coord(t_read *r, int x, int y, t_lem *l)
 	while (tmp)
 	{
 		if (tmp->x == x && tmp->y == y)
-			return (set_error(r, "Room with same coordinates exist", r->i + 1, ERR));
+			return (set_error(r, "The room could not be visualized, due to overlapping coordinates.", r->i + 1, ERR));
 		tmp = tmp->next;
 	}
 	return (0);
@@ -66,22 +57,19 @@ int 		is_it_room(t_read *r)
 {
 	int		i;
 	char 	**strs;
-	char 	*tofree;
 
-	tofree = ft_strdup(r->buf);
-	strs = ft_strsplit(tofree, ' ', 1);
-	free(tofree);
+	strs = ft_strsplit(r->buf, ' ', 1);
 	i = 0;
-	if (!strs)
-		return (0);
-	while (strs[i])
+	while (strs && strs[i])
 		i++;
-	if (i == 3)
-		return (1);
-	return (0);
+	if (i != 3)
+	{
+		free_str_arr(strs);
+		return (0);
+	}
+	free_str_arr(strs);
+	return (1);
 }
-
-// proverky na 'L'
 
 int 		invalid_room(t_lem *l, int is_spec)
 {
@@ -89,11 +77,18 @@ int 		invalid_room(t_lem *l, int is_spec)
 
 	if (!is_it_room(l->read))
 		return (set_error(l->read, "It does not look like a room", l->read->i + 1, ERR) - 1);
+	if (l->read->buf[0] == 'L')
+		return (set_error(l->read, "Room should not start from \'L\' letter", l->read->i + 1, ERR) - 1);
 	strs = ft_strsplit(l->read->buf, ' ', 1);
-	if (invalid_room_name(l->read, strs[0], l) ||
-			invalid_room_coord(l->read, ft_atoi(strs[1]),
-					ft_atoi(strs[2]), l) || (is_spec && extra_se_room(l, is_spec)))
+
+	if ((l->vis && invalid_room_coord(l->read, ft_atoi(strs[1]),
+			ft_atoi(strs[2]), l)) ||
+			invalid_room_name(l->read, strs[0], l) ||
+			(is_spec && extra_se_room(l, is_spec)))
+	{
+		free_str_arr(strs);
 		return (1);
+	}
 	add_room(l, strs, is_spec);
 	return (0);
 }

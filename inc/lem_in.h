@@ -28,6 +28,7 @@
 
 typedef struct      s_room t_room;
 typedef struct		s_neigh t_neigh;
+typedef struct		s_err	t_err;
 
 struct				s_neigh
 {
@@ -46,30 +47,36 @@ struct      		s_room
 
 typedef struct		s_err
 {
-	char 			*err_msg;
-	int 			err_line;
-	int 			err_lvl;
+	char 			*msg;
+	int 			line;
+	int 			lvl;
+	t_err			*next;
 }					t_err;
 
 typedef struct		s_read
 {
 	int 			i;
-	int 			ants_readed;
-	int 			ants;
+	unsigned int	ants_readed;
 	char            **input;
+	char 			*in_str;
 	char			*buf;
 	char 			*l_r1;
 	char 			*l_r2;
-	t_err			error;
+	t_err			*errors;
 }					t_read;
 
 typedef struct      s_lem
 {
+	int				vis:1;
 	t_read			*read;
 	t_room			*head;
  	t_room			*start;
  	t_room			*end;
 }                   t_lem;
+#include <sys/stat.h>
+#include <fcntl.h>
+int fd;
+
 
 /*
 **	 Reader functions
