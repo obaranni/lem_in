@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.12)
-project(lem_in)
+project(lem-in)
 
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(inc)
 include_directories(libft/inc)
 
-add_executable(lem_in
+add_executable(lem-in
         inc/lem_in.h
         libft/inc/get_next_line.h
         libft/inc/libft.h
@@ -117,4 +117,4 @@ add_executable(lem_in
         testing_files/valid8
         testing_files/valid9
         author
-        Makefile libft/src/gnl.c)
+        Makefile libft/src/gnl.c src/bfs.c src/connect_rooms.c)

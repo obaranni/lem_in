@@ -26,7 +26,10 @@
 # define WAR 1
 # define ERR 2
 
-typedef struct      s_room t_room;
+# define NOT_PROCESSED 0
+# define PROCESSED 1
+
+typedef struct      s_room	t_room;
 typedef struct		s_neigh t_neigh;
 typedef struct		s_err	t_err;
 
@@ -43,6 +46,8 @@ struct      		s_room
 	int 			y;
 	t_neigh			*neighbors;
 	t_room			*next;
+	int 			way_id;
+	int 			is_processed;
 };
 
 typedef struct		s_err
@@ -72,7 +77,11 @@ typedef struct      s_lem
 	t_room			*head;
  	t_room			*start;
  	t_room			*end;
+ 	t_room			**ways;
 }                   t_lem;
+
+
+
 #include <sys/stat.h>
 #include <fcntl.h>
 int fd;
@@ -94,10 +103,20 @@ int					invalid_link(t_lem *l);
 int					is_it_ants(t_read *r);
 int					read_ants(t_read *r);
 
+void				free_all(t_lem *l);
 void				free_str_arr(char **strs);
 int 				set_error(t_read *r, char *err_msg, int err_line, int err_lvl);
 
 void				add_to_input(t_read *r);
 int 				reader(t_lem *l);
+
+/*
+**	 BFS
+*/
+
+int					find_ways(t_lem *l);
+
+//delete
+t_room		*find_room_byname(t_room *room, char *name);
 
 #endif

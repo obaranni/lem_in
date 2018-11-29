@@ -1,5 +1,13 @@
 #include "../inc/lem_in.h"
 
+void		init_lem(t_lem *l)
+{
+	l->start = NULL;
+	l->end = NULL;
+	l->head = NULL;
+	l->ways = NULL;
+}
+
 int 		is_enough_data(t_lem *l)
 {
 	if (!l->read->ants_readed)
@@ -38,17 +46,19 @@ int 		is_it_error(t_lem *l)
 
 int			main(void)
 {
-	t_lem	l;
+	t_lem l;
 
-	fd = open("/Users/obaranni/projects/lem_in/testing_files/valid1", O_RDONLY);
-	l.vis = 1;
-    if (!reader(&l))
-    	is_enough_data(&l);
-    if (is_it_error(&l))
-    {
-    	free_all(l.read->input);
-		//return (1);
+	fd = open("/Users/obaranni/projects/lem_in/testing_files/valid13", O_RDONLY);
+	init_lem(&l);
+	l.vis = 1; // TODO: visual mod
+	if (!reader(&l))
+		is_enough_data(&l);
+	if (is_it_error(&l))
+	{
+//    	free_all(l.read->input);
+		return (1);
 	}
-	system("leaks lem_in");
+	find_ways(&l);
+	//system("leaks lem-in");
 	return (0);
 }

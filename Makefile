@@ -6,7 +6,7 @@
 #    By: obaranni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/27 15:44:29 by obaranni          #+#    #+#              #
-#    Updated: 2018/11/22 19:17:18 by obaranni         ###   ########.fr        #
+#    Updated: 2018/11/29 15:07:38 by obaranni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC_FILES =	$(addprefix $(SRC_DIR),$(SRC))
 
 OBJ_FILES =	$(addprefix $(OBJ_DIR),$(OBJ))
 
-COMPALING_FLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIB_DIR)# `pkg-config --cflags gtk+-3.0`
+
+COMPALING_FLAGS = -I$(INC_DIR) -I$(LIB_DIR)# `pkg-config --cflags gtk+-3.0`
 
 LINKING_FLAGS = -framework opengl -framework appkit -lft -L$(LIB_DIR) # -lmlx -L minilibx_macos `pkg-config --libs --cflags gtk+-3.0`
 

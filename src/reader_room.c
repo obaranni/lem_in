@@ -62,13 +62,8 @@ int 		is_it_room(t_read *r)
 	i = 0;
 	while (strs && strs[i])
 		i++;
-	if (i != 3)
-	{
-		free_str_arr(strs);
-		return (0);
-	}
 	free_str_arr(strs);
-	return (1);
+	return (i != 3 ? 0 : 1);
 }
 
 int 		invalid_room(t_lem *l, int is_spec)
