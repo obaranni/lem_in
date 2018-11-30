@@ -13,6 +13,13 @@ int 			get_way_id(t_lem *l)
 	return (i);
 }
 
+t_room			*get_last_room(t_room *head)
+{
+	while (head->next)
+		head = head->next;
+	return (head);
+}
+
 t_neigh			*neigh_dup(t_neigh *src)
 {
 	t_neigh		*new;
@@ -31,7 +38,7 @@ void			cp_neighbors(t_room *dst, t_room *src)
 	tmp1 = src->neighbors;
 	if (tmp1)
 		dst->neighbors = neigh_dup(tmp1);
-	if (tmp1->next)
+	if (tmp1 && tmp1->next)
 		tmp1 = tmp1->next;
 	else
 		return;
@@ -59,17 +66,43 @@ t_room			*room_dup(t_room *src)
 	return (copy);
 }
 
-t_room			*create_room_pair(t_room *top, t_room *bott, int way_id)
+t_room			*way_dup(t_room *src_head, int way_id)
 {
-	t_room		*new_top;
-	t_room		*new_bott;
+	t_room		*new_head;
+	t_room		*tmp1;
+	t_room		*tmp2;
 
-	new_top = room_dup(top);
-	new_bott = room_dup(bott);
-	new_top->next = new_bott;
-	new_top->way_id = way_id;
-	new_bott->way_id = way_id;
-	return (new_top);
+	new_head = room_dup(src_head);
+	new_head->way_id = way_id;
+	new_head->is_processed = PROCESSED;
+
+	tmp1 = new_head;
+	while (src_head->next)
+	{
+		tmp2 = room_dup(src_head->next);
+		tmp2->way_id = way_id;
+		tmp2->is_processed = PROCESSED;
+		tmp1->next = tmp2;
+		src_head = src_head->next;
+		tmp1 = tmp1->next;
+	}
+	return (new_head);
+}
+
+t_room			*create_new_way(t_room *way_head, t_room *new_room, int way_id)
+{
+	t_room		*new_way;
+	t_room		*last_room;
+
+	new_way = way_dup(way_head, way_id);
+
+	last_room = get_last_room(new_way);
+	last_room->next = room_dup(new_room);
+
+	last_room->next->way_id = way_id;
+
+
+	return (new_way);
 }
 
 void			uppend_way(t_lem *l, t_room *new_part)
@@ -87,33 +120,91 @@ void			uppend_way(t_lem *l, t_room *new_part)
 		i++;
 	}
 	new_ways[i] = new_part;
-	new_ways[i]->is_processed = PROCESSED;
 	new_ways[i + 1] = NULL;
 	if (way_id)
 		free(l->ways);
 	l->ways = new_ways;
 }
 
+int				is_crossed_room(t_neigh *neigh, t_room *way)
+{
+	char 		*name;
+
+	name = neigh->origin->name;
+	while (way)
+	{
+		if (!ft_strcmp(name, way->name))
+			return (1);
+		way = way->next;
+	}
+	return (0);
+}
+
 void			BFS(t_room *start, t_lem *l)
 {
 	int 		way_id;
-	t_neigh		*tmp_neigh;
-	tmp_neigh = start->neighbors;
-	while (start->next && start->is_processed == PROCESSED)
-		start = start->next;
-	while (tmp_neigh)
+	t_neigh		*neigh;
+	t_room		*last_room;
+	t_room		*new_way;
+
+
+	last_room = get_last_room(start);
+	if (last_room->is_processed == PROCESSED)
+		return;
+	last_room->is_processed = PROCESSED;
+	neigh = last_room->neighbors;
+	while (neigh)
 	{
+		if (is_crossed_room(neigh, start))
+		{
+			neigh = neigh->next;
+			continue ;
+		}
 		way_id = get_way_id(l);
-		uppend_way(l, create_room_pair(start, tmp_neigh->origin, way_id));
-		tmp_neigh = tmp_neigh->next;
+		new_way = create_new_way(start, neigh->origin, way_id);
+		uppend_way(l, new_way);
+		neigh = neigh->next;
 	}
 
 }
 
-int		find_ways(t_lem *l)
+void			print_way(t_room *way)
 {
-	// creating genesis ways
-	BFS(l->start, l);
+	while (way)
+	{
+		if (way->next)
+			printf("%s -> ", way->name);
+		else
+			printf("%s\n", way->name);
+		way = way->next;
+	}
+}
 
-	//
+int				find_ways(t_lem *l)
+{
+	int 		i;
+
+	BFS(room_dup(l->start), l);
+	i = 0;
+	while (l->ways[i])
+	{
+		BFS(l->ways[i], l);
+		i++;
+	}
+
+
+
+	i = 0;
+	int j = 0;
+	while (l->ways[i])
+	{
+		if (!ft_strcmp((get_last_room(l->ways[i]))->name, l->end->name))
+		{
+			j++;
+			print_way(l->ways[i]);
+		}
+		i++;
+	}
+	printf("CORRECT WAYS %d\n", j);
+
 }
