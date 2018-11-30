@@ -3,8 +3,21 @@
 
 void		add_to_input(t_read *r)
 {
-	r->input[r->i] = ft_strdup(r->buf);
-	r->i++;
+	char 	*tmp;
+
+	if (!r->input)
+	{
+		r->input = ft_strjoin(r->buf, "\n");
+	}
+	else
+	{
+		tmp = r->input;
+		r->input = ft_strjoin(r->input, r->buf);
+		free(tmp);
+		tmp = r->input;
+		r->input = ft_strjoin(r->input, "\n");
+		free(tmp);
+	}
 	free(r->buf);
 }
 
@@ -39,14 +52,13 @@ void		reader_init(t_lem *l)
 	l->read->errors = NULL;
 	l->read->ants_readed = 0;
 	l->read->i = 0;
-	l->read->input = (char **)malloc(sizeof(char*) * MAX_INSTR);
+	l->read->input = NULL;
 }
 
 int         reader(t_lem *l)
 {
 	reader_init(l);
-	// TODO: change MAX_INSTR to reading into one string with \n's
-	while (l->read->i < MAX_INSTR && lgnl(fd, &(l->read->buf)))
+	while (lgnl(fd, &(l->read->buf)))
 	{
 		if (l->read->buf[0] && l->read->buf[0] != 10 && valid(l->read, l))
 			add_to_input(l->read);

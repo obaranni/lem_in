@@ -180,22 +180,13 @@ void			print_way(t_room *way)
 	}
 }
 
-int				find_ways(t_lem *l)
+void			print_ways(t_lem *l)
 {
 	int 		i;
-
-	BFS(room_dup(l->start), l);
-	i = 0;
-	while (l->ways[i])
-	{
-		BFS(l->ways[i], l);
-		i++;
-	}
-
-
+	int 		j;
 
 	i = 0;
-	int j = 0;
+	j = 0;
 	while (l->ways[i])
 	{
 		if (!ft_strcmp((get_last_room(l->ways[i]))->name, l->end->name))
@@ -206,5 +197,24 @@ int				find_ways(t_lem *l)
 		i++;
 	}
 	printf("CORRECT WAYS %d\n", j);
+}
 
+int				find_ways(t_lem *l)
+{
+	int 		i;
+	t_room		*start_cp;
+
+	start_cp = room_dup(l->start);
+	BFS(start_cp, l);
+	free_room(start_cp);
+	i = 0;
+	while (l->ways[i])
+	{
+		BFS(l->ways[i], l);
+		i++;
+	}
+
+
+
+	print_ways(l);
 }

@@ -35,7 +35,7 @@ int 		invalid_room_name(t_read *r, char *name, t_lem *l)
 		tmp = tmp->next;
 	}
 	if (l->vis && ft_strlen(name) > MAX_NAME_R)
-		return (set_error(r, "Room cannot be visualized, to long name", r->i + 1, ERR));
+		return (set_error(r, "Room cannot be visualized, too long name", r->i + 1, ERR));
 	return (0);
 }
 

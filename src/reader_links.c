@@ -37,7 +37,6 @@ int 		invalid_rooms(char *n1, char *n2, t_lem *l, int set_err)
 	if (set_err)
 		set_error(l->read, err, l->read->i, ERR);
 	free(err);
-	dprintf(2, "n1 = |%s|\t|%s|\n", n1, n2);
 	return (1);
 }
 

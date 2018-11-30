@@ -21,7 +21,6 @@
 # define COMMON_R 0
 # define START_R 1
 # define END_R 2
-# define MAX_INSTR 4096
 # define MAX_NAME_R 11
 # define WAR 1
 # define ERR 2
@@ -62,8 +61,7 @@ typedef struct		s_read
 {
 	int 			i;
 	unsigned int	ants_readed;
-	char            **input;
-	char 			*in_str;
+	char            *input;
 	char			*buf;
 	char 			*l_r1;
 	char 			*l_r2;
@@ -103,6 +101,7 @@ int					invalid_link(t_lem *l);
 int					is_it_ants(t_read *r);
 int					read_ants(t_read *r);
 
+void				free_room(t_room *room);
 void				free_all(t_lem *l);
 void				free_str_arr(char **strs);
 int 				set_error(t_read *r, char *err_msg, int err_line, int err_lvl);

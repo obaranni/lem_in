@@ -38,7 +38,7 @@ int 		is_it_error(t_lem *l)
 		ft_putendl(" line.");
 		ft_putstr("Explanation message: ");
 		ft_putendl(tmp_err->msg);
-		ft_putendl("");
+		ft_putchar('\n');
 		tmp_err = tmp_err->next;
 	}
 	return (is_err);
@@ -49,16 +49,19 @@ int			main(void)
 	t_lem l;
 
 	fd = open("/Users/obaranni/projects/lem_in/testing_files/valid13", O_RDONLY);
+	if (fd < 0)
+		perror("Bad file!\n");
 	init_lem(&l);
 	l.vis = 1; // TODO: visual mod
 	if (!reader(&l))
 		is_enough_data(&l);
 	if (is_it_error(&l))
 	{
-//    	free_all(l.read->input);
+    	free_all(&l);
 		return (1);
 	}
 	find_ways(&l);
-	//system("leaks lem-in");
+	free_all(&l);
+//	system("leaks lem-in");
 	return (0);
 }
