@@ -101,7 +101,9 @@ int					invalid_link(t_lem *l);
 int					is_it_ants(t_read *r);
 int					read_ants(t_read *r);
 
+void				free_ways(t_room **ways);
 void				free_room(t_room *room);
+void				free_rooms(t_room *room);
 void				free_all(t_lem *l);
 void				free_str_arr(char **strs);
 int 				set_error(t_read *r, char *err_msg, int err_line, int err_lvl);

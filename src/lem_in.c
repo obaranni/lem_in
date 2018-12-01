@@ -58,9 +58,16 @@ int			main(void)
 	if (is_it_error(&l))
 	{
     	free_all(&l);
+//		system("leaks lem-in");
 		return (1);
 	}
 	find_ways(&l);
+	if (is_it_error(&l))
+	{
+		free_all(&l);
+//		system("leaks lem-in");
+		return (1);
+	}
 	free_all(&l);
 //	system("leaks lem-in");
 	return (0);

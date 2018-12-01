@@ -20,34 +20,32 @@ t_room			*get_last_room(t_room *head)
 	return (head);
 }
 
-t_neigh			*neigh_dup(t_neigh *src)
+t_neigh			*neigbor_dup(t_neigh *neigh)
 {
-	t_neigh		*new;
+	t_neigh		*new_neigh;
 
-	new = (t_neigh *)malloc(sizeof(t_neigh));
-	new->origin = src->origin;
-	new->next = 0;
-	return (new);
+	new_neigh = (t_neigh *)malloc(sizeof(t_neigh));
+	new_neigh->origin = neigh->origin;
+	new_neigh->next = NULL;
+	return (new_neigh);
 }
 
-void			cp_neighbors(t_room *dst, t_room *src)
+void			neighbors_dup(t_room *dst, t_room *src)
 {
-	t_neigh		*tmp1;
-	t_neigh		*tmp2;
+	t_neigh		*tmp_src;
+	t_neigh		*tmp_dst;
 
-	tmp1 = src->neighbors;
-	if (tmp1)
-		dst->neighbors = neigh_dup(tmp1);
-	if (tmp1 && tmp1->next)
-		tmp1 = tmp1->next;
-	else
-		return;
-	tmp2 = dst->neighbors;
-	while (tmp1)
+	if (src->neighbors == NULL)
+		return ;
+	tmp_src = src->neighbors;
+	tmp_dst = neigbor_dup(tmp_src);
+	dst->neighbors = tmp_dst;
+	tmp_src = tmp_src->next;
+	while (tmp_src)
 	{
-		tmp2->next = neigh_dup(tmp1);
-		tmp1 = tmp1->next;
-		tmp2 = tmp2->next;
+		tmp_dst->next = neigbor_dup(tmp_src);
+		tmp_dst = tmp_dst->next;
+		tmp_src = tmp_src->next;
 	}
 }
 
@@ -60,9 +58,10 @@ t_room			*room_dup(t_room *src)
 	copy->next = 0;
 	copy->way_id = -1;
 	copy->is_processed = NOT_PROCESSED;
+	copy->neighbors = NULL;
 	copy->x = src->x;
 	copy->y = src->y;
-	cp_neighbors(copy, src);
+	neighbors_dup(copy, src);
 	return (copy);
 }
 
@@ -152,6 +151,8 @@ void			BFS(t_room *start, t_lem *l)
 	if (last_room->is_processed == PROCESSED)
 		return;
 	last_room->is_processed = PROCESSED;
+	if (!ft_strcmp(last_room->name, l->end->name))
+		return;
 	neigh = last_room->neighbors;
 	while (neigh)
 	{
@@ -183,20 +184,49 @@ void			print_way(t_room *way)
 void			print_ways(t_lem *l)
 {
 	int 		i;
-	int 		j;
 
+	i = 0;
+	if (!l->ways)
+		return;
+	while (l->ways[i])
+	{
+		print_way(l->ways[i]);
+		i++;
+	}
+	printf("WAYS %d\n", i);
+}
+
+void			remove_bad_ways(t_lem *l)
+{
+	t_room **full_ways;
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	if (!l->ways)
+		return;
+	while (l->ways[i])
+	{
+		if (!ft_strcmp((get_last_room(l->ways[i]))->name, l->end->name))
+			j++;
+		i++;
+	}
+	full_ways = (t_room **)malloc(sizeof(t_room *) * (j + 1));
+	full_ways[j] = NULL;
 	i = 0;
 	j = 0;
 	while (l->ways[i])
 	{
 		if (!ft_strcmp((get_last_room(l->ways[i]))->name, l->end->name))
-		{
-			j++;
-			print_way(l->ways[i]);
-		}
+			full_ways[j++] = l->ways[i];
+		else
+			free_rooms(l->ways[i]);
+
 		i++;
 	}
-	printf("CORRECT WAYS %d\n", j);
+	free(l->ways);
+	l->ways = full_ways;
 }
 
 int				find_ways(t_lem *l)
@@ -205,16 +235,21 @@ int				find_ways(t_lem *l)
 	t_room		*start_cp;
 
 	start_cp = room_dup(l->start);
-	BFS(start_cp, l);
+	BFS(start_cp, l); // check returned NULL
 	free_room(start_cp);
 	i = 0;
+	if (!l->ways)
+		return (set_error(l->read, "No links ", l->read->i, ERR)); // TODO: refactoring of text needed
 	while (l->ways[i])
 	{
 		BFS(l->ways[i], l);
 		i++;
 	}
-
-
-
 	print_ways(l);
+	remove_bad_ways(l);
+	if (!l->ways[0])
+		return (set_error(l->read, "The Start and End rooms are not connected", l->read->i, ERR));
+	print_ways(l);
+	return (0);
 }
+// TODO: stop to find neighbors in END room (optimization)

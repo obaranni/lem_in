@@ -9,7 +9,7 @@ void		append_neigh(t_room *main, t_room *to_append)
 	t_neigh	*tmp;
 	t_neigh	*new;
 
-	new = (t_neigh*)malloc(sizeof(t_neigh*));
+	new = (t_neigh *)malloc(sizeof(t_neigh));
 	new->origin = to_append;
 	new->next = 0;
 	if (main->neighbors == 0)

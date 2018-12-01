@@ -19,9 +19,9 @@ void		free_neighbors(t_neigh *neigh)
 
 	while (neigh)
 	{
-		tmp_n = neigh;
+		tmp_n = neigh->next;
 		free(neigh);
-		neigh = tmp_n->next;
+		neigh = tmp_n;
 	}
 }
 
@@ -39,9 +39,9 @@ void		free_rooms(t_room *head)
 
 	while (head)
 	{
-		tmp = head;
+		tmp = head->next;
 		free_room(head);
-		head = tmp->next;
+		head = tmp;
 	}
 }
 
@@ -63,6 +63,7 @@ void		free_ways(t_room **ways)
 {
 	int 	i;
 
+	i = 0;
 	while (ways && ways[i])
 	{
 		free_rooms(ways[i]);
@@ -72,11 +73,10 @@ void		free_ways(t_room **ways)
 		free(ways);
 }
 
-void		free_all(t_lem *l)
-{
-	free_rooms(l->head);
+void		free_all(t_lem *l){
 	free(l->read->input);
 	free_errors(l->read->errors);
 	free(l->read);
 	free_ways(l->ways);
+	free_rooms(l->head);
 }

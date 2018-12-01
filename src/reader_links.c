@@ -27,7 +27,6 @@ int 		invalid_rooms(char *n1, char *n2, t_lem *l, int set_err)
 {
 	char 	*err;
 
-	err = NULL;
 	if (!is_room_exist(n1, l->head, 1))
 		err = ft_strjoin("There are no rooms with name: ", n1);
 	else if (!is_room_exist(n2, l->head, 1))
