@@ -66,7 +66,6 @@ int					is_it_link(t_lem *l, t_read *r)
 	return (0);
 }
 
-
 t_room		*find_room_byname(t_room *room, char *name)
 {
 

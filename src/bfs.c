@@ -3,12 +3,12 @@
 //
 #include "../inc/lem_in.h"
 
-int 			get_way_id(t_lem *l)
+int 			get_way_id(t_room **ways)
 {
 	int 		i;
 
 	i = 0;
-	while (l->ways && l->ways[i])
+	while (ways && ways[i])
 		i++;
 	return (i);
 }
@@ -104,25 +104,25 @@ t_room			*create_new_way(t_room *way_head, t_room *new_room, int way_id)
 	return (new_way);
 }
 
-void			uppend_way(t_lem *l, t_room *new_part)
+void			upend_way(t_room ***ways, t_room *new_part)
 {
 	t_room		**new_ways;
 	int 		way_id;
 	int 		i;
 
-	way_id = get_way_id(l);
+	way_id = get_way_id(*ways);
 	new_ways = (t_room**)malloc(sizeof(t_room*) * (way_id + 2));
 	i = 0;
 	while (i < way_id)
 	{
-		new_ways[i] = l->ways[i];
+		new_ways[i] = (*ways)[i];
 		i++;
 	}
 	new_ways[i] = new_part;
 	new_ways[i + 1] = NULL;
 	if (way_id)
-		free(l->ways);
-	l->ways = new_ways;
+		free(*ways);
+	*ways = new_ways;
 }
 
 int				is_crossed_room(t_neigh *neigh, t_room *way)
@@ -161,39 +161,12 @@ void			BFS(t_room *start, t_lem *l)
 			neigh = neigh->next;
 			continue ;
 		}
-		way_id = get_way_id(l);
+		way_id = get_way_id(l->ways);
 		new_way = create_new_way(start, neigh->origin, way_id);
-		uppend_way(l, new_way);
+		upend_way(&l->ways, new_way);
 		neigh = neigh->next;
 	}
 
-}
-
-void			print_way(t_room *way)
-{
-	while (way)
-	{
-		if (way->next)
-			printf("%s -> ", way->name);
-		else
-			printf("%s\n", way->name);
-		way = way->next;
-	}
-}
-
-void			print_ways(t_lem *l)
-{
-	int 		i;
-
-	i = 0;
-	if (!l->ways)
-		return;
-	while (l->ways[i])
-	{
-		print_way(l->ways[i]);
-		i++;
-	}
-	printf("WAYS %d\n", i);
 }
 
 void			remove_bad_ways(t_lem *l)
@@ -229,6 +202,19 @@ void			remove_bad_ways(t_lem *l)
 	l->ways = full_ways;
 }
 
+int 				count_steps(t_room* way, int ants)
+{
+	int 			i;
+
+	i = 0;
+	while (way->next)
+	{
+		i++;
+		way = way->next;
+	}
+	return ((i - 1) + ants);
+}
+
 int				find_ways(t_lem *l)
 {
 	int 		i;
@@ -239,17 +225,30 @@ int				find_ways(t_lem *l)
 	free_room(start_cp);
 	i = 0;
 	if (!l->ways)
-		return (set_error(l->read, "No links ", l->read->i, ERR)); // TODO: refactoring of text needed
+		return (set_error(l->read, "There are no connections between the rooms", l->read->i, ERR));
 	while (l->ways[i])
 	{
 		BFS(l->ways[i], l);
 		i++;
 	}
-	print_ways(l);
+//	if (l->flags.print) // TODO: add flag wrong ways
+//		print_ways(l->ways);
 	remove_bad_ways(l);
 	if (!l->ways[0])
 		return (set_error(l->read, "The Start and End rooms are not connected", l->read->i, ERR));
-	print_ways(l);
+//	if (l->flags.print)
+//		print_ways(l->ways);
+
+
+//	printf("Ants: %d\n", l->read->ants_readed);
+//	i = 0;
+//	while (l->ways[i])
+//	{
+//		print_way(l->ways[i]);
+//		printf("Steps: %d\n\n", count_steps(l->ways[i], l->read->ants_readed));
+//		i++;
+//	}
+
+
 	return (0);
 }
-// TODO: stop to find neighbors in END room (optimization)

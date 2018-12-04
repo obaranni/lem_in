@@ -6,6 +6,7 @@ void		init_lem(t_lem *l)
 	l->end = NULL;
 	l->head = NULL;
 	l->ways = NULL;
+	l->packages = NULL;
 }
 
 int 		is_enough_data(t_lem *l)
@@ -19,7 +20,7 @@ int 		is_enough_data(t_lem *l)
 	return (0);
 }
 
-int 		is_it_error(t_lem *l)
+int 		is_it_error(t_lem *l) // TODO: something with errors doljno byt
 {
 	t_err	*tmp_err;
 	int 	is_err;
@@ -44,30 +45,48 @@ int 		is_it_error(t_lem *l)
 	return (is_err);
 }
 
-int			main(void)
+int 		try_read(t_lem *l)
+{
+	if (!reader(l))
+		is_enough_data(l);
+	if (is_it_error(l))
+	{
+		free_all(l);
+//		system("leaks lem-in");
+		return (1);
+	}
+	return (0);
+}
+
+int 		try_find_ways(t_lem *l)
+{
+	find_ways(l);
+	if (is_it_error(l))
+	{
+		free_all(l);
+//		system("leaks lem-in");
+		return (1);
+	}
+	return (0);
+}
+
+int			main(int ac, char **av)
 {
 	t_lem l;
 
-	fd = open("/Users/obaranni/projects/lem_in/testing_files/valid13", O_RDONLY);
-	if (fd < 0)
-		perror("Bad file!\n");
+
+	check_arguments(&(l.flags), av, ac);
+
 	init_lem(&l);
-	l.vis = 1; // TODO: visual mod
-	if (!reader(&l))
-		is_enough_data(&l);
-	if (is_it_error(&l))
-	{
-    	free_all(&l);
-//		system("leaks lem-in");
-		return (1);
-	}
-	find_ways(&l);
-	if (is_it_error(&l))
-	{
-		free_all(&l);
-//		system("leaks lem-in");
-		return (1);
-	}
+	if (try_read(&l))
+		return (WRONG_INPUT);
+	if (try_find_ways(&l))
+		return (WRONG_WAYS);
+
+
+	create_packages(&l);
+
+
 	free_all(&l);
 //	system("leaks lem-in");
 	return (0);

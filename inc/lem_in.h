@@ -16,6 +16,10 @@
 # include "../libft/inc/get_next_line.h"
 # include <stdio.h>
 # include "stdlib.h"
+# define WRONG_ARGUMENTS 2
+# define WRONG_FILE 3
+# define WRONG_INPUT 4
+# define WRONG_WAYS 5
 # define START "##start"
 # define END "##end"
 # define COMMON_R 0
@@ -31,6 +35,8 @@
 typedef struct      s_room	t_room;
 typedef struct		s_neigh t_neigh;
 typedef struct		s_err	t_err;
+typedef struct		s_ant	t_ant;
+typedef struct		s_pack	t_pack;
 
 struct				s_neigh
 {
@@ -48,6 +54,21 @@ struct      		s_room
 	int 			way_id;
 	int 			is_processed;
 };
+
+typedef struct		s_ant
+{
+	int				id;
+	t_room			*way;
+	t_ant			*next;
+}					t_ant;
+
+typedef struct		s_pack
+{
+	int 			id;
+	int 			ways_num;
+	t_room			**parallel_ways;
+	t_pack			*next;
+}					t_pack;
 
 typedef struct		s_err
 {
@@ -68,45 +89,84 @@ typedef struct		s_read
 	t_err			*errors;
 }					t_read;
 
+typedef struct		s_flags
+{
+	int 			print:1;
+	int				vis:1;
+	int				a_visual:1;
+	int				o_visual:1;
+	int				file:1;
+	int 			fd;
+}					t_flags;
+
 typedef struct      s_lem
 {
-	int				vis:1;
+	t_flags			flags;
 	t_read			*read;
 	t_room			*head;
  	t_room			*start;
  	t_room			*end;
  	t_room			**ways;
+ 	t_pack			*packages;
 }                   t_lem;
 
 
 
 #include <sys/stat.h>
 #include <fcntl.h>
-int fd;
-
 
 /*
-**	 Reader functions
+** Check arguments
+*/
+
+int				check_arguments(t_flags *flags, char **av, int ac);
+
+/*
+**	 Reader | rooms functions
 */
 
 int					is_it_room(t_read *r);
 void				add_room(t_lem *l, char **room, int is_spec);
 int					invalid_room(t_lem *l, int is_spec);
-int					read_room(t_read *r, char which);
+int					read_room(int fd, t_read *r, char which);
 
+/*
+**	 Reader | links functions
+*/
+
+t_room				*find_room_byname(t_room *room, char *name);
 void				link_rooms(t_room *r1, t_room *r2);
 int 				is_it_link(t_lem *l, t_read *r);
 int					invalid_link(t_lem *l);
 
+/*
+**	 Reader | ants functions
+*/
+
 int					is_it_ants(t_read *r);
 int					read_ants(t_read *r);
+
+/*
+**	 Free functions
+*/
 
 void				free_ways(t_room **ways);
 void				free_room(t_room *room);
 void				free_rooms(t_room *room);
+void				free_neighbors(t_neigh *neigh);
 void				free_all(t_lem *l);
 void				free_str_arr(char **strs);
+void				free_errors(t_err *errors);
+
+/*
+**	 Error functions
+*/
+
 int 				set_error(t_read *r, char *err_msg, int err_line, int err_lvl);
+
+/*
+**	 Reader | general functions
+*/
 
 void				add_to_input(t_read *r);
 int 				reader(t_lem *l);
@@ -115,9 +175,27 @@ int 				reader(t_lem *l);
 **	 BFS
 */
 
+int 				count_steps(t_room* way, int ants);
 int					find_ways(t_lem *l);
 
-//delete
-t_room		*find_room_byname(t_room *room, char *name);
+/*
+**	 Ways functions
+*/
+
+void				upend_way(t_room ***ways, t_room *new_part);
+int 				get_way_id(t_room **ways);
+
+/*
+**	 Packages functions
+*/
+
+void				create_packages(t_lem *l);
+
+/*
+**	 Print functions
+*/
+
+void			print_ways(t_room **ways);
+void			print_packages(t_pack *packages);
 
 #endif

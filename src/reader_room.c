@@ -9,10 +9,10 @@ int			extra_se_room(t_lem *l, int is_spec)
 	return (0);
 }
 
-int 		read_room(t_read *r, char which)
+int 		read_room(int fd, t_read *r, char which)
 {
 	add_to_input(r);
-	get_next_line(fd, &r->buf);
+	lgnl(fd, &r->buf);
 	if (ft_strlen(r->buf) < 5)
 	{
 		if (which == 's')
@@ -34,7 +34,7 @@ int 		invalid_room_name(t_read *r, char *name, t_lem *l)
 			return (set_error(r, "Room with same name exist", r->i + 1, ERR));
 		tmp = tmp->next;
 	}
-	if (l->vis && ft_strlen(name) > MAX_NAME_R)
+	if (l->flags.vis && ft_strlen(name) > MAX_NAME_R)
 		return (set_error(r, "Room cannot be visualized, too long name", r->i + 1, ERR));
 	return (0);
 }
@@ -76,7 +76,7 @@ int 		invalid_room(t_lem *l, int is_spec)
 		return (set_error(l->read, "Room should not start from \'L\' letter", l->read->i + 1, ERR) - 1);
 	strs = ft_strsplit(l->read->buf, ' ', 1);
 
-	if ((l->vis && invalid_room_coord(l->read, ft_atoi(strs[1]),
+	if ((l->flags.vis && invalid_room_coord(l->read, ft_atoi(strs[1]),
 			ft_atoi(strs[2]), l)) ||
 			invalid_room_name(l->read, strs[0], l) ||
 			(is_spec && extra_se_room(l, is_spec)))

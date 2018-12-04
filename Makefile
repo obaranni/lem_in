@@ -6,7 +6,7 @@
 #    By: obaranni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/27 15:44:29 by obaranni          #+#    #+#              #
-#    Updated: 2018/11/29 15:07:38 by obaranni         ###   ########.fr        #
+#    Updated: 2018/12/04 19:06:37 by obaranni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,10 @@ SRC =		lem_in.c					\
 			reader_links.c				\
 			set_error.c					\
 			reader_ants.c				\
+			bfs.c						\
+			connect_rooms.c				\
+			create_packages.c			\
+			check_arguments.c			\
 			reader_room.c				
 
 OBJ = $(SRC:.c=.o)

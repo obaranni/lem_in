@@ -79,4 +79,6 @@ void		free_all(t_lem *l){
 	free(l->read);
 	free_ways(l->ways);
 	free_rooms(l->head);
+	if (l->flags.fd)
+		close(l->flags.fd);
 }
