@@ -73,12 +73,44 @@ void		free_ways(t_room **ways)
 		free(ways);
 }
 
-void		free_all(t_lem *l){
+void		free_ants(t_ant *ant)
+{
+	t_ant	*tmp;
+
+	while (ant)
+	{
+		tmp = ant->next;
+		free(ant);
+		ant = tmp;
+	}
+}
+
+void		free_packages(t_pack *pack)
+{
+	t_pack	*tmp;
+
+	while (pack)
+	{
+		tmp = pack->next;
+		free_ants(pack->ants);
+		free(pack->ants_on_ways);
+		free(pack->load_on_ways);
+		free(pack->ways_capacity);
+		free(pack->parallel_ways);
+		free(pack);
+		pack = tmp;
+	}
+}
+
+void		free_all(t_lem *l)
+{
 	free(l->read->input);
 	free_errors(l->read->errors);
 	free(l->read);
 	free_ways(l->ways);
 	free_rooms(l->head);
+	free_packages(l->packages);
+
 	if (l->flags.fd)
 		close(l->flags.fd);
 }

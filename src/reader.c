@@ -62,6 +62,5 @@ int         reader(t_lem *l)
 			return (1);
 		}
 	}
-
 	return (0);
 }

@@ -49,9 +49,11 @@ void 			upend_package(t_lem *l, int id)
 	new_pack->id = id;
 	new_pack->next = NULL;
 	new_pack->parallel_ways = NULL;
-	new_pack->package_capacity = 0;
 	new_pack->ways_capacity = 0;
+	new_pack->ants_setted = 0;
 	new_pack->ways_num = 0;
+	new_pack->total_steps = 0;
+	new_pack->ants = NULL;
 	if (!l->packages)
 	{
 		l->packages = new_pack;
@@ -71,10 +73,7 @@ int 			is_same_packages(t_pack *p1, t_pack *p2)
 
 	i = 0;
 	found = 0;
-	int o = get_way_id(p1->parallel_ways);
-
-
-	while (p1->parallel_ways[i])// TODO: remove same packages!!
+	while (p1->parallel_ways[i])
 	{
 		j = 0;
 		while (p2->parallel_ways[j])
@@ -162,7 +161,8 @@ void 			create_packages(t_lem *l)
 	if (l->flags.print && l->flags.bad_cases)
 		print_packages(l->packages);
 	remove_same_packages(l);
-	set_package_power(l->packages);
+	set_packages_capacity(l->packages);
+	set_ants_quantity_on_ways(l, l->packages);
 	if (l->flags.print)
 		print_packages(l->packages);
 

@@ -1,8 +1,9 @@
 #include "../inc/lem_in.h"
 
+
+
 int 			get_file(t_flags *flags, char *s)
 {
-	flags->file = 1;
 	flags->fd = open(s, O_RDONLY);
 	if (flags->fd < 0)
 	{

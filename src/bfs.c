@@ -232,12 +232,12 @@ int				find_ways(t_lem *l)
 		i++;
 	}
 	if (l->flags.print && l->flags.bad_cases)
-		print_ways(0, l->ways);
+		print_ways(0, 0, l->ways);
 	remove_bad_ways(l);
 	if (!l->ways[0])
 		return (set_error(l->read, "The Start and End rooms are not connected", l->read->i, ERR));
 	if (l->flags.print)
-		print_ways(0, l->ways);
+		print_ways(0, 0, l->ways);
 
 
 //	printf("Ants: %d\n", l->read->ants_readed);

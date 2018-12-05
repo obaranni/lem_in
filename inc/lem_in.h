@@ -32,6 +32,7 @@
 # define ERR 2
 # define NOT_PROCESSED 0
 # define PROCESSED 1
+# define INT_MAX 2147483647
 
 typedef struct      s_room	t_room;
 typedef struct		s_neigh t_neigh;
@@ -66,9 +67,13 @@ typedef struct		s_ant
 typedef struct		s_pack
 {
 	int 			id;
+	int 			ants_setted;
 	int 			ways_num;
-	float 			package_capacity;
+	int 			total_steps;
+	t_ant			*ants;
 	float 			*ways_capacity;
+	int 			*ants_on_ways;
+	int 			*load_on_ways;
 	t_room			**parallel_ways;
 	t_pack			*next;
 }					t_pack;
@@ -92,13 +97,19 @@ typedef struct		s_read
 	t_err			*errors;
 }					t_read;
 
+typedef struct		s_fd
+{
+	int 			fd;
+	char 			*name;
+	struct s_fd		*next;
+}					t_fd;
+
 typedef struct		s_flags
 {
 	int 			print:1;
 	int				vis:1;
 	int				bad_cases:1;
 	int				o_visual:1;
-	int				file:1;
 	int 			fd;
 }					t_flags;
 
@@ -170,7 +181,7 @@ void				add_to_input(t_read *r);
 int 				reader(t_lem *l);
 
 /*
-**	 BFS
+**	 BFS (ways finding)
 */
 
 int 				count_steps(t_room* way, int ants);
@@ -187,17 +198,26 @@ int 				get_way_id(t_room **ways);
 **	 Packages functions
 */
 
-void				set_package_power(t_pack *pack);
+void				set_packages_capacity(t_pack *pack);
+void				set_ants_quantity_on_ways(t_lem *l, t_pack *packages);
 void				create_packages(t_lem *l);
-void				get_best_package(t_lem *l);
+t_pack        		*get_best_package(t_pack *pack);
 
+/*
+**	 Ants functions
+*/
+
+void				create_ants(int quantity, t_pack *pack);
+void				move_ants(t_lem *l, t_pack *pack);
 
 /*
 **	 Print functions
 */
 
-void			print_way(float cap, t_room *way);
-void			print_ways(float *cap, t_room **ways);
+void			print_ant_step(t_ant *ant);
+void			print_ants(t_ant *ant);
+void			print_way(int ants, float cap, t_room *way);
+void			print_ways(int *ants, float *cap, t_room **ways);
 void			print_packages(t_pack *packages);
 
 #endif
