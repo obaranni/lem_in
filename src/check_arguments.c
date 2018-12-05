@@ -21,8 +21,8 @@ int				get_flags_help(t_flags *flags, char *av, char *file)
 			flags->print = 1;
 		else if (*av == 'v')
 			flags->vis = 1;
-		else if (*av == 'a')
-			flags->a_visual = 1;
+		else if (*av == 'b')
+			flags->bad_cases = 1;
 		else if (*av == 'o')
 			flags->o_visual = 1;
 		else if (*av == 'f')
@@ -47,8 +47,8 @@ int				get_flags(t_flags *flags, char **av)
 			flags->print = 1;
 		else if (ft_strcmp(av[counter], "-v") == 0)// Рыба
 			flags->vis = 1;
-		else if (ft_strcmp(av[counter], "-a") == 0)// Рыба
-			flags->a_visual = 1;
+		else if (ft_strcmp(av[counter], "-b") == 0)// Рыба
+			flags->bad_cases = 1;
 		else if (ft_strcmp(av[counter], "-o") == 0)// Рыба
 			flags->o_visual = 1;
 		else if (av[counter + 1] && ft_strcmp(av[counter], "-f") == 0)// Рыба
@@ -76,7 +76,7 @@ int				check_arguments(t_flags *flags, char **av, int ac)
 	}
 	else if (ac > 2)
 	{
-		ft_putstr_fd("Usage: ./lem-in [-pvaof] < map\n", 2);
+		ft_putstr_fd("Usage: ./lem-in [-pvbof] < map\n", 2);
 		exit (WRONG_ARGUMENTS);
 	}
 	return (0);

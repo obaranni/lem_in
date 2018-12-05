@@ -16,6 +16,8 @@
 # include "../libft/inc/get_next_line.h"
 # include <stdio.h>
 # include "stdlib.h"
+# include <sys/stat.h>
+# include <fcntl.h>
 # define WRONG_ARGUMENTS 2
 # define WRONG_FILE 3
 # define WRONG_INPUT 4
@@ -28,7 +30,6 @@
 # define MAX_NAME_R 11
 # define WAR 1
 # define ERR 2
-
 # define NOT_PROCESSED 0
 # define PROCESSED 1
 
@@ -66,6 +67,8 @@ typedef struct		s_pack
 {
 	int 			id;
 	int 			ways_num;
+	float 			package_capacity;
+	float 			*ways_capacity;
 	t_room			**parallel_ways;
 	t_pack			*next;
 }					t_pack;
@@ -93,7 +96,7 @@ typedef struct		s_flags
 {
 	int 			print:1;
 	int				vis:1;
-	int				a_visual:1;
+	int				bad_cases:1;
 	int				o_visual:1;
 	int				file:1;
 	int 			fd;
@@ -110,16 +113,11 @@ typedef struct      s_lem
  	t_pack			*packages;
 }                   t_lem;
 
-
-
-#include <sys/stat.h>
-#include <fcntl.h>
-
 /*
 ** Check arguments
 */
 
-int				check_arguments(t_flags *flags, char **av, int ac);
+int					check_arguments(t_flags *flags, char **av, int ac);
 
 /*
 **	 Reader | rooms functions
@@ -189,13 +187,17 @@ int 				get_way_id(t_room **ways);
 **	 Packages functions
 */
 
+void				set_package_power(t_pack *pack);
 void				create_packages(t_lem *l);
+void				get_best_package(t_lem *l);
+
 
 /*
 **	 Print functions
 */
 
-void			print_ways(t_room **ways);
+void			print_way(float cap, t_room *way);
+void			print_ways(float *cap, t_room **ways);
 void			print_packages(t_pack *packages);
 
 #endif

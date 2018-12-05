@@ -1,34 +1,30 @@
 #include "../inc/lem_in.h"
 
-void			print_way(t_room *way)
+void			print_way(float cap, t_room *way)
 {
-	int 		id_printed;
-
-	id_printed = 0;
+	ft_putstr("id: ");
+	ft_putnbr(way->way_id);
+	if (cap)
+	{
+		ft_putstr(" | cap: ");
+		ft_putnbr((int)cap);
+//		printf("%f", cap); // TODO: printf forbidden
+	}
+	ft_putstr(" | ");
 	while (way)
 	{
-		if (!id_printed)
-		{
-			id_printed = 1;
-			ft_putstr("way_id: ");
-			ft_putnbr(way->way_id);
-			ft_putstr(" | ");
-		}
 		if (way->next)
 		{
 			ft_putstr(way->name);
 			ft_putstr(" -> ");
 		}
 		else
-		{
 			ft_putendl(way->name);
-			id_printed = 0;
-		}
 		way = way->next;
 	}
 }
 
-void			print_ways(t_room **ways)
+void			print_ways(float *cap, t_room **ways)
 {
 	int 		i;
 
@@ -38,7 +34,9 @@ void			print_ways(t_room **ways)
 	ft_putendl("Ways:");
 	while (ways[i])
 	{
-		print_way(ways[i]);
+		if (cap)
+			print_way(cap[i], ways[i]);
+		print_way(0, ways[i]);
 		i++;
 	}
 	ft_putchar('\n');
@@ -59,9 +57,12 @@ void			print_packages(t_pack *packages)
 		ft_putstr("\n***** Package ");
 		ft_putnbr(i + 1);
 		ft_putendl(" *****");
-		print_ways(tmp_p->parallel_ways);
+		print_ways(tmp_p->ways_capacity, tmp_p->parallel_ways);
+		ft_putstr("Power: ");
+		ft_putnbr((int)tmp_p->package_capacity);
+//		printf("%f", tmp_p->package_capacity); //TODO: printf forbidden
+		ft_putendl("\n********************\n");
 		tmp_p = tmp_p->next;
 		i++;
-		ft_putendl("********************\n");
 	}
 }

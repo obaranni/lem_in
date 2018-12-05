@@ -17,7 +17,7 @@ t_pack			*get_pack_by_id(t_lem *l, int id)
 	return (tmp);
 }
 
-int				is_ways_parallel(t_lem *l, t_room *w1, t_room *w2)
+int				is_ways_parallel(t_room *w1, t_room *w2)
 {
 	t_room		*w2_tmp;
 
@@ -49,6 +49,8 @@ void 			upend_package(t_lem *l, int id)
 	new_pack->id = id;
 	new_pack->next = NULL;
 	new_pack->parallel_ways = NULL;
+	new_pack->package_capacity = 0;
+	new_pack->ways_capacity = 0;
 	new_pack->ways_num = 0;
 	if (!l->packages)
 	{
@@ -68,24 +70,27 @@ int 			is_same_packages(t_pack *p1, t_pack *p2)
 	int 		found;
 
 	i = 0;
-	while (p1->parallel_ways[i])
+	found = 0;
+	int o = get_way_id(p1->parallel_ways);
+
+
+	while (p1->parallel_ways[i])// TODO: remove same packages!!
 	{
-		found = 0;
 		j = 0;
 		while (p2->parallel_ways[j])
 		{
 			if (p1->parallel_ways[i] == p2->parallel_ways[j])
 			{
-				found = 1;
+				found++;
 				break;
 			}
 			j++;
 		}
-		if (!found)
-			return (0);
 		i++;
 	}
-	return (1);
+	if (found == get_way_id(p1->parallel_ways) && found == get_way_id(p2->parallel_ways))
+		return (1);
+	return (0);
 }
 
 void			remove_same_packages(t_lem *l)
@@ -103,10 +108,26 @@ void			remove_same_packages(t_lem *l)
 			first->next = sec->next;
 			free(sec->parallel_ways);
 			free(sec);
+			first = l->packages;
+			continue;
 		}
 		first = first->next;
 
 	}
+}
+
+int 			is_ways_parallel_in_package(t_pack *pack, t_room *new_way)
+{
+	int 		i;
+
+	i = 0;
+	while (pack->parallel_ways[i])
+	{
+		if (!is_ways_parallel(pack->parallel_ways[i], new_way))
+            return (0);
+		i++;
+	}
+    return (1);
 }
 
 void 			create_packages(t_lem *l)
@@ -128,7 +149,7 @@ void 			create_packages(t_lem *l)
 				j++;
 			if (!l->ways[j])
 				break;
-			if (is_ways_parallel(l, l->ways[i], l->ways[j]))
+			if (is_ways_parallel_in_package(get_pack_by_id(l, i), l->ways[j]))
 			{
 				upend_way(&(get_pack_by_id(l, i)->parallel_ways), l->ways[j]);
 				count++;
@@ -138,8 +159,11 @@ void 			create_packages(t_lem *l)
 		i++;
 	}
 
-
-	print_packages(l->packages);
+	if (l->flags.print && l->flags.bad_cases)
+		print_packages(l->packages);
 	remove_same_packages(l);
-	print_packages(l->packages);
+	set_package_power(l->packages);
+	if (l->flags.print)
+		print_packages(l->packages);
+
 }

@@ -23,16 +23,17 @@ LIB_DIR = ./libft/
 LIBFT = $(LIB_DIR)libft.a
 
 SRC =		lem_in.c					\
-			add_room.c					\
-			reader.c					\
-			free.c						\
+			add_room.c				\
+			reader.c				\
+			free.c					\
 			reader_links.c				\
-			set_error.c					\
+			set_error.c				\
 			reader_ants.c				\
-			bfs.c						\
+			bfs.c					\
 			connect_rooms.c				\
 			create_packages.c			\
 			check_arguments.c			\
+			print.c					\
 			reader_room.c				
 
 OBJ = $(SRC:.c=.o)

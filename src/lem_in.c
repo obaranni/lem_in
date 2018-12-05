@@ -1,5 +1,13 @@
 #include "../inc/lem_in.h"
 
+void        init_flags(t_flags *flags)
+{
+    flags->vis = 0;
+    flags->bad_cases = 0;
+    flags->print = 0;
+    flags->fd = 0;
+}
+
 void		init_lem(t_lem *l)
 {
 	l->start = NULL;
@@ -7,6 +15,7 @@ void		init_lem(t_lem *l)
 	l->head = NULL;
 	l->ways = NULL;
 	l->packages = NULL;
+	init_flags(&l->flags);
 }
 
 int 		is_enough_data(t_lem *l)
@@ -74,10 +83,8 @@ int			main(int ac, char **av)
 {
 	t_lem l;
 
-
+    init_lem(&l);
 	check_arguments(&(l.flags), av, ac);
-
-	init_lem(&l);
 	if (try_read(&l))
 		return (WRONG_INPUT);
 	if (try_find_ways(&l))
@@ -85,7 +92,7 @@ int			main(int ac, char **av)
 
 
 	create_packages(&l);
-
+//	get_best_package(&l);
 
 	free_all(&l);
 //	system("leaks lem-in");

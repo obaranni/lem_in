@@ -117,4 +117,4 @@ add_executable(lem-in
         testing_files/valid8
         testing_files/valid9
         author
-        Makefile libft/src/gnl.c src/bfs.c src/connect_rooms.c src/check_arguments.c src/create_packages.c src/print.c)
+        Makefile libft/src/gnl.c src/bfs.c src/connect_rooms.c src/check_arguments.c src/create_packages.c src/print.c src/get_best_package.c)
