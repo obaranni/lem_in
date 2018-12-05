@@ -18,21 +18,33 @@
 # include "stdlib.h"
 # include <sys/stat.h>
 # include <fcntl.h>
+
 # define WRONG_ARGUMENTS 2
-# define WRONG_FILE 3
-# define WRONG_INPUT 4
-# define WRONG_WAYS 5
+# define WRONG_INPUT 3
+# define WRONG_WAYS 4
+
 # define START "##start"
 # define END "##end"
+
 # define COMMON_R 0
 # define START_R 1
 # define END_R 2
 # define MAX_NAME_R 11
+
 # define WAR 1
 # define ERR 2
+
 # define NOT_PROCESSED 0
 # define PROCESSED 1
+
 # define INT_MAX 2147483647
+
+# define RESET            "\x1b[0m"
+# define MAGENTA        "\x1b[35m"
+# define CYAN            "\x1b[36m"
+# define L_RED            "\x1b[91m"
+# define L_BLUE            "\x1b[94m"
+# define L_MAGENTA        "\x1b[95m"
 
 typedef struct      s_room	t_room;
 typedef struct		s_neigh t_neigh;
@@ -109,7 +121,7 @@ typedef struct		s_flags
 	unsigned 		print:1;
 	unsigned		vis:1;
 	unsigned		bad_cases:1;
-	unsigned		o_visual:1;
+	unsigned		color:1;
 	t_fd 			*fd;
 	int 			files;
 }					t_flags;
@@ -124,6 +136,15 @@ typedef struct      s_lem
  	t_room			**ways;
  	t_pack			*packages;
 }                   t_lem;
+
+/*
+** Initialization functions
+*/
+
+void				init_flags(t_flags *flags);
+void				init_lem(t_lem *l);
+void				reader_init(t_lem *l);
+
 
 /*
 ** Check arguments
@@ -209,6 +230,7 @@ t_pack        		*get_best_package(t_pack *pack);
 /*
 **	 Ants functions
 */
+
 void				set_ants_on_ways(t_pack *pack);
 void				prepare_ants(t_lem *l);
 void				create_ants(int quantity, t_pack *pack);
@@ -218,10 +240,10 @@ void				move_ants(t_lem *l);
 **	 Print functions
 */
 
-void			print_ant_step(t_ant *ant);
-void			print_ants(t_ant *ant);
-void			print_way(int ants, float cap, t_room *way);
-void			print_ways(int *ants, float *cap, t_room **ways);
-void			print_packages(t_pack *packages);
+void				print_ant_step(t_lem *l, t_ant *ant);
+void				print_ants(t_lem *l, t_ant *ant);
+void				print_way(t_lem *l, int ants, float cap, t_room *way);
+void				print_ways(t_lem *l, int *ants, float *cap, t_room **ways);
+void				print_packages(t_lem *l, t_pack *packages);
 
 #endif

@@ -1,6 +1,6 @@
 #include "../inc/lem_in.h"
 
-void			print_way(int ants, float cap, t_room *way)
+void			print_way(t_lem *l, int ants, float cap, t_room *way)
 {
 	ft_putstr("id: ");
 	ft_putnbr(way->way_id);
@@ -33,7 +33,7 @@ void			print_way(int ants, float cap, t_room *way)
 	}
 }
 
-void			print_ways(int *ants, float *cap, t_room **ways)
+void			print_ways(t_lem *l, int *ants, float *cap, t_room **ways)
 {
 	int 		i;
 
@@ -44,9 +44,9 @@ void			print_ways(int *ants, float *cap, t_room **ways)
 	while (ways[i])
 	{
 		if (cap)
-			print_way(ants[i], cap[i], ways[i]);
+			print_way(l, ants[i], cap[i], ways[i]);
 		else
-			print_way(0, 0, ways[i]);
+			print_way(l, 0, 0, ways[i]);
 		i++;
 	}
 	ft_putchar('\n');
@@ -55,28 +55,32 @@ void			print_ways(int *ants, float *cap, t_room **ways)
 	ft_putchar('\n');
 }
 
-void			print_packages(t_pack *packages)
+void			print_packages(t_lem *l, t_pack *packages)
 {
 	t_pack		*tmp_p;
 	int 		i;
 
 	i = 0;
 	tmp_p = packages;
+	if (l->flags.color)
+		ft_putstr(MAGENTA);
 	while (tmp_p)
 	{
 		ft_putstr("\n***** Package ");
 		ft_putnbr(i + 1);
 		ft_putendl(" *****");
-		print_ways(tmp_p->ants_on_ways, tmp_p->ways_capacity, tmp_p->parallel_ways);
+		print_ways(l, tmp_p->ants_on_ways, tmp_p->ways_capacity, tmp_p->parallel_ways);
 		ft_putstr("Steps to perform: ");
 		ft_putnbr(tmp_p->total_steps);
 		ft_putendl("\n********************\n");
 		tmp_p = tmp_p->next;
 		i++;
 	}
+	if (l->flags.color)
+		ft_putstr(RESET);
 }
 
-void			print_ants(t_ant *ant)
+void			print_ants(t_lem *l, t_ant *ant)
 {
 	while (ant)
 	{
@@ -90,7 +94,7 @@ void			print_ants(t_ant *ant)
 	}
 }
 
-void				print_ant_step(t_ant *ant)
+void				print_ant_step(t_lem *l, t_ant *ant)
 {
 	ft_putchar('L');
 	ft_putnbr(ant->id + 1);

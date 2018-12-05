@@ -6,7 +6,7 @@
 #    By: obaranni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/27 15:44:29 by obaranni          #+#    #+#              #
-#    Updated: 2018/12/05 18:34:30 by obaranni         ###   ########.fr        #
+#    Updated: 2018/12/05 20:43:48 by obaranni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,9 @@ SRC =		lem_in.c					\
 			move_ants.c					\
 			set_ants_on_ways.c			\
 			set_packages_capacity.c		\
+			ants_preparation.c			\
+			package_preparation.c		\
+			inits.c						\
 			reader_room.c				
 
 OBJ = $(SRC:.c=.o)

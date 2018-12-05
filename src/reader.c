@@ -40,15 +40,6 @@ int 		valid(t_read *r, t_lem *l)
 		return (set_error(r, "Record format is broken, find the error and try again.", r->i + 1, ERR) - 1);
 }
 
-void		reader_init(t_lem *l)
-{
-	l->read = (t_read*)malloc(sizeof(t_read));
-	l->read->errors = NULL;
-	l->read->ants_readed = 0;
-	l->read->i = 0;
-	l->read->input = NULL;
-}
-
 int         reader(t_lem *l)
 {
 	reader_init(l);

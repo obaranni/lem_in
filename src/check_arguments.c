@@ -1,6 +1,5 @@
 #include "../inc/lem_in.h"
 
-
 t_fd			*create_fd(void)
 {
 	t_fd		*temp;
@@ -32,11 +31,10 @@ int 			get_file(t_flags *flags, char **av)
 	return (0);
 }
 
-
 int				get_flags_help(t_flags *flags, char **av)
 {
 	(*av)++;
-	while (*av)
+	while (*av && **av)
 	{
 		if (**av == 'p')
 			flags->print = 1;
@@ -44,8 +42,8 @@ int				get_flags_help(t_flags *flags, char **av)
 			flags->vis = 1;
 		else if (**av == 'b')
 			flags->bad_cases = 1;
-		else if (**av == 'o')
-			flags->o_visual = 1;
+		else if (**av == 'c')
+			flags->color = 1;
 		else if (**av == 'f')
 		{
 			get_flags_help(flags, av);
@@ -70,8 +68,8 @@ int				get_flags(t_flags *flags, char **av)
 			flags->vis = 1;
 		else if (ft_strcmp(*av, "-b") == 0)// Рыба
 			flags->bad_cases = 1;
-		else if (ft_strcmp(*av, "-o") == 0)// Рыба
-			flags->o_visual = 1;
+		else if (ft_strcmp(*av, "-c") == 0)// Рыба
+			flags->color = 1;
 		else if ((av + 1) && ft_strcmp(*av, "-f") == 0)// Рыба
 		{
 			get_file(flags, av + 1);
@@ -88,7 +86,6 @@ int				get_flags(t_flags *flags, char **av)
 	return (0);
 }
 
-
 int				check_arguments(t_flags *flags, char **av, int ac)
 {
 	if (av[1] && av[1][0] == '-')
@@ -102,6 +99,7 @@ int				check_arguments(t_flags *flags, char **av, int ac)
 	}
 	if (flags->fd == NULL)
 	{
+		flags->fd = create_fd();
 		flags->fd->fd = 0;
 		flags->files = 1;
 	}

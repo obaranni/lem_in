@@ -27,7 +27,7 @@ void				move_ants(t_lem *l)
 			if (ant->way->next && (!ft_strcmp(ant->way->next->name, l->end->name) || !is_room_busy(ant->way->next->name, pack->ants)))
 			{
 				ant->way = ant->way->next;
-				print_ant_step(ant);
+				print_ant_step(l, ant);
 				if (!ft_strcmp(ant->way->name, l->end->name))
 					ants_finished++;
 			}
