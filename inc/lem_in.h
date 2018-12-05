@@ -89,7 +89,7 @@ typedef struct		s_err
 typedef struct		s_read
 {
 	int 			i;
-	unsigned int	ants_readed;
+	unsigned		ants_readed;
 	char            *input;
 	char			*buf;
 	char 			*l_r1;
@@ -100,17 +100,18 @@ typedef struct		s_read
 typedef struct		s_fd
 {
 	int 			fd;
-	char 			*name;
+	char 			*file;
 	struct s_fd		*next;
 }					t_fd;
 
 typedef struct		s_flags
 {
-	int 			print:1;
-	int				vis:1;
-	int				bad_cases:1;
-	int				o_visual:1;
-	int 			fd;
+	unsigned 		print:1;
+	unsigned		vis:1;
+	unsigned		bad_cases:1;
+	unsigned		o_visual:1;
+	t_fd 			*fd;
+	int 			files;
 }					t_flags;
 
 typedef struct      s_lem

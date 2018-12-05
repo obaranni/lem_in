@@ -5,6 +5,7 @@ void        init_flags(t_flags *flags)
     flags->vis = 0;
     flags->bad_cases = 0;
     flags->print = 0;
+    flags->files = 0;
     flags->fd = NULL;
 }
 
@@ -15,7 +16,7 @@ void		init_lem(t_lem *l)
 	l->head = NULL;
 	l->ways = NULL;
 	l->packages = NULL;
-	init_flags(&l->flags);
+	l->read = NULL;
 }
 
 int 		is_enough_data(t_lem *l)
@@ -84,51 +85,30 @@ int			main(int ac, char **av)
 	t_lem l;
 
 	init_lem(&l);
+	init_flags(&(l.flags));
 	check_arguments(&(l.flags), av, ac);
-//	while ()
-//	{
+	while (l.flags.files--)
+	{
+		if ((l.flags.fd->fd = open(l.flags.fd->file, O_RDONLY)) == -1)
+		{
+			//message about bad file
+			free_all(&l);
+			continue ;
+		}
+		//header: name of file
+	//		ft_putstr("MAP :");
+	//		ft_putendl(l.flags.fd->file);
+	//		ft_putstr("\n\n\n\n");
 		if (try_read(&l))
 			return (WRONG_INPUT);
 		if (try_find_ways(&l))
 			return (WRONG_WAYS);
 		create_packages(&l);
-		move_ants(&l,
-				  get_best_package(l.packages));
-
+		move_ants(&l, get_best_package(l.packages));
 		free_all(&l);
-
-
-
-		l.start = NULL;
-		l.end = NULL;
-		l.head = NULL;
-		l.ways = NULL;
-		l.packages = NULL;
-		//	system("leaks lem-in");
+		init_lem(&l);
 		ft_putstr("\n\n");
-//	}
+	}
+	system("leaks lem-in");
 	return (0);
 }
-
-/*
-int			main(int ac, char **av)
-{
-	t_lem l;
-
-    init_lem(&l);
-	check_arguments(&(l.flags), av, ac);
-	if (try_read(&l))
-		return (WRONG_INPUT);
-	if (try_find_ways(&l))
-		return (WRONG_WAYS);
-
-
-	create_packages(&l);
-	move_ants(&l,
-		get_best_package(l.packages));
-
-	free_all(&l);
-//	system("leaks lem-in");
-	return (0);
-}
-*/

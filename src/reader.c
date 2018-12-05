@@ -27,9 +27,9 @@ int 		valid(t_read *r, t_lem *l)
 	if (is_it_ants(r))
 		return (read_ants(r));
 	else if (!ft_strcmp(r->buf, START))
-		return (!read_room(l->flags.fd, r, START[2]) && !invalid_room(l, START_R));
+		return (!read_room(l->flags.fd->fd, r, START[2]) && !invalid_room(l, START_R));
 	else if (!ft_strcmp(r->buf, END))
-		return(!read_room(l->flags.fd, r, END[2]) && !invalid_room(l, END_R));
+		return(!read_room(l->flags.fd->fd, r, END[2]) && !invalid_room(l, END_R));
 	else if (r->buf[0] == '#')
 		return (1);
 	else if (is_it_room(r))
@@ -52,7 +52,7 @@ void		reader_init(t_lem *l)
 int         reader(t_lem *l)
 {
 	reader_init(l);
-	while (lgnl(l->flags.fd, &(l->read->buf)))
+	while (lgnl(l->flags.fd->fd, &(l->read->buf)))
 	{
 		if (valid(l->read, l) == 1)
 			add_to_input(l->read);

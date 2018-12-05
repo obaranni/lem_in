@@ -102,15 +102,28 @@ void		free_packages(t_pack *pack)
 	}
 }
 
+void		free_fd(t_fd **fd)
+{
+	t_fd	*temp;
+
+	temp = *fd;
+	*fd = (*fd)->next;
+	close(temp->fd);
+	free(temp->file);
+	free(temp);
+}
+
 void		free_all(t_lem *l)
 {
-	free(l->read->input);
-	free_errors(l->read->errors);
-	free(l->read);
+	if (l->read)
+	{
+		free(l->read->input);
+		free_errors(l->read->errors);
+		free(l->read);
+	}
 	free_ways(l->ways);
 	free_rooms(l->head);
 	free_packages(l->packages);
 
-	if (l->flags.fd)
-		close(l->flags.fd);
+	free_fd(&(l->flags.fd));
 }
