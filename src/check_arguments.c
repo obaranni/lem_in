@@ -1,33 +1,41 @@
 #include "../inc/lem_in.h"
 
-t_fd			*create_fd(void)
+int				get_flags_help3(t_flags *flags, char **av)
 {
-	t_fd		*temp;
-
-	temp = (t_fd *)malloc(sizeof(t_fd));
-	*temp = (t_fd){0, NULL, NULL};
-	return (temp);
+	if (ft_strcmp(*av, "-p") == 0)
+		flags->packages = 1;
+	else if (ft_strcmp(*av, "-a") == 0)// Рыба
+		flags->ants = 1;
+	else if (ft_strcmp(*av, "-w") == 0)// Рыба
+		flags->ways = 1;
+	else if (ft_strcmp(*av, "-i") == 0)// Рыба
+		flags->info = 1;
+	else if (ft_strcmp(*av, "-v") == 0)// Рыба
+		flags->vis = 1;
+	else if (ft_strcmp(*av, "-b") == 0)// Рыба
+		flags->bad_cases = 1;
+	else if (ft_strcmp(*av, "-c") == 0)// Рыба
+		flags->color = 1;
+	return (0);
 }
 
-int 			get_file(t_flags *flags, char **av)
-{
-	t_fd		*temp;
 
-	flags->fd = create_fd();
-	temp = flags->fd;
-	while (*av)
-	{
-		temp->file = ft_strdup(*av);
-		av++;
-		if (*av)
-		{
-			temp->next = (t_fd *)malloc(sizeof(t_fd));
-			*temp->next = (t_fd){0, NULL, NULL};
-			temp = temp->next;
-		}
-		flags->files++;
-	}
-//	*av = NULL;
+int				get_flags_help2(t_flags *flags, char **av)
+{
+	if (**av == 'p')
+		return(flags->packages = 1);
+	else if (**av == 'a')
+		return(flags->ants = 1);
+	else if (**av == 'w')
+		return(flags->ways = 1);
+	else if (**av == 'i')
+		return(flags->info = 1);
+	else if (**av == 'v')
+		return(flags->vis = 1);
+	else if (**av == 'b')
+		return(flags->bad_cases = 1);
+	else if (**av == 'c')
+		return(flags->color = 1);
 	return (0);
 }
 
@@ -36,14 +44,11 @@ int				get_flags_help(t_flags *flags, char **av)
 	(*av)++;
 	while (*av && **av)
 	{
-		if (**av == 'p')
-			flags->print = 1;
-		else if (**av == 'v')
-			flags->vis = 1;
-		else if (**av == 'b')
-			flags->bad_cases = 1;
-		else if (**av == 'c')
-			flags->color = 1;
+		if (get_flags_help2(flags, av))
+		{
+			(*av)++;
+			continue;
+		}
 		else if (**av == 'f')
 		{
 			get_flags_help(flags, av);
@@ -62,14 +67,11 @@ int				get_flags(t_flags *flags, char **av)
 {
 	while (*av && **av == '-')
 	{
-		if (ft_strcmp(*av, "-p") == 0)
-			flags->print = 1;
-		else if (ft_strcmp(*av, "-v") == 0)// Рыба
-			flags->vis = 1;
-		else if (ft_strcmp(*av, "-b") == 0)// Рыба
-			flags->bad_cases = 1;
-		else if (ft_strcmp(*av, "-c") == 0)// Рыба
-			flags->color = 1;
+		if (get_flags_help3(flags, av))
+		{
+			av++;
+			continue;
+		}
 		else if ((av + 1) && ft_strcmp(*av, "-f") == 0)// Рыба
 		{
 			get_file(flags, av + 1);
@@ -78,7 +80,7 @@ int				get_flags(t_flags *flags, char **av)
 		else if (*(*av) == '-')
 			if ((av + 1) && get_flags_help(flags, av) == 1)
 			{
-				ft_putstr_fd("Usage: ./lem-in [-pvaof] < map\n", 2);
+				print_usage();
 				exit (WRONG_ARGUMENTS);
 			}
 		av++;
@@ -89,12 +91,10 @@ int				get_flags(t_flags *flags, char **av)
 int				check_arguments(t_flags *flags, char **av, int ac)
 {
 	if (av[1] && av[1][0] == '-')
-	{
 		get_flags(flags, (av + 1));
-	}
 	else if (ac > 2)
 	{
-		ft_putstr_fd("Usage: ./lem-in [-pvbof] < map\n", 2);
+		print_usage();
 		exit (WRONG_ARGUMENTS);
 	}
 	if (flags->fd == NULL)

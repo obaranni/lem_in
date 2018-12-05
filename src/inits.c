@@ -4,7 +4,10 @@ void        init_flags(t_flags *flags)
 {
 	flags->vis = 0;
 	flags->bad_cases = 0;
-	flags->print = 0;
+	flags->packages = 0;
+	flags->ants = 0;
+	flags->info = 0;
+	flags->ways = 0;
 	flags->files = 0;
 	flags->fd = NULL;
 }
