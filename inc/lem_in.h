@@ -199,7 +199,9 @@ int 				get_way_id(t_room **ways);
 **	 Packages functions
 */
 
+void				remove_same_packages(t_lem *l);
 void				set_packages_capacity(t_pack *pack);
+void				prepare_packages(t_lem *l);
 void				set_ants_quantity_on_ways(t_lem *l, t_pack *packages);
 void				create_packages(t_lem *l);
 t_pack        		*get_best_package(t_pack *pack);
@@ -207,9 +209,10 @@ t_pack        		*get_best_package(t_pack *pack);
 /*
 **	 Ants functions
 */
-
+void				set_ants_on_ways(t_pack *pack);
+void				prepare_ants(t_lem *l);
 void				create_ants(int quantity, t_pack *pack);
-void				move_ants(t_lem *l, t_pack *pack);
+void				move_ants(t_lem *l);
 
 /*
 **	 Print functions

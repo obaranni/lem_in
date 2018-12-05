@@ -103,12 +103,13 @@ int			main(int ac, char **av)
 			return (WRONG_INPUT);
 		if (try_find_ways(&l))
 			return (WRONG_WAYS);
-		create_packages(&l);
-		move_ants(&l, get_best_package(l.packages));
+		prepare_packages(&l);
+		prepare_ants(&l);
+		move_ants(&l);
 		free_all(&l);
 		init_lem(&l);
 		ft_putstr("\n\n");
 	}
-	system("leaks lem-in");
+		//	system("leaks lem-in");
 	return (0);
 }
