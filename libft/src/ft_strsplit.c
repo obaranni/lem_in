@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obaranni chestno eto ya <oleksandr32riabyi@gmail.com>      +#+  +:+       +#+        */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/16 09:29:41 by ariabyi           #+#    #+#             */
-/*   Updated: 2017/11/27 14:38:26 by ariabyi          ###   ########.fr       */
+/*   Created: 2018/12/06 13:21:03 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 13:22:41 by obaranni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-static int             ft_iswsps(const char *str)
+static int			ft_iswsps(const char *str)
 {
 	size_t x;
 
@@ -47,7 +47,7 @@ static int			c_words(const char *s, char c, int code)
 			flag = 0;
 		}
 		while (s[i] && ((s[i] != c && !code) ||
-						(code == 1 && (s[i] != ' ' && s[i] != '\t' && s[i] != c))))
+			(code == 1 && (s[i] != ' ' && s[i] != '\t' && s[i] != c))))
 		{
 			i++;
 			if (flag == 0 && (flag = 1))
@@ -69,10 +69,10 @@ static size_t		len_split(const char **string, char c, int code)
 	i = 0;
 	ret = 0;
 	while (wip[i] && (wip[i] == c ||
-					  (code == 1 && (wip[i] == ' ' || wip[i] == '\t'))))
+		(code == 1 && (wip[i] == ' ' || wip[i] == '\t'))))
 		i++;
 	while (wip[i] && ((wip[i] != c && !code) ||
-					  (code == 1 && (wip[i] != ' ' && wip[i] != '\t' && wip[i] != c))))
+		(code == 1 && (wip[i] != ' ' && wip[i] != '\t' && wip[i] != c))))
 	{
 		ret++;
 		i++;
@@ -91,10 +91,10 @@ static char			*get_word(const char **string, char c, int code)
 		return (NULL);
 	ret = ft_strnew(temp);
 	while (**string && (**string == c ||
-						(code == 1 && (**string == ' ' || **string == '\t'))))
+		(code == 1 && (**string == ' ' || **string == '\t'))))
 		(*string)++;
 	while (**string && ((**string != c && !code) ||
-						(code == 1 && (**string != ' ' && **string != '\t' && **string != c))))
+		(code == 1 && (**string != ' ' && **string != '\t' && **string != c))))
 	{
 		ret[i++] = **string;
 		(*string)++;

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_float.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 13:23:30 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 13:25:57 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/libft.h"
 
-static void	ft_print_float(int fd, float nbr)
+static void		ft_print_float(int fd, float nbr)
 {
-	float	tmp;
-	long	l;
+	float		tmp;
+	long		l;
 
 	tmp = nbr;
 	l = 1;
@@ -22,7 +34,7 @@ static void	ft_print_float(int fd, float nbr)
 	}
 }
 
-void		ft_putnbr_float(int fd, float nbr)
+void			ft_putnbr_float(int fd, float nbr)
 {
 	if (nbr < 0)
 	{

@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 15:13:35 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 15:14:13 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/lem_in.h"
 
 void			print_usage(void)
 {
 	ft_putstr(L_RED);
-	ft_putstr_fd("Usage: ./lem-in [-pbvawif] < map\n", 2);
+	ft_putstr_fd("Usage: ./lem-in -[pabviwfc] < map\n", 2);
 	ft_putstr(RESET);
-
 }
 
 void			print_error(t_err *error)
@@ -49,7 +60,7 @@ void			print_footer(t_lem *l)
 		ft_putstr(RESET);
 }
 
-void				print_ant_step(t_lem *l, t_ant *ant)
+void			print_ant_step(t_lem *l, t_ant *ant)
 {
 	if (l->flags.color)
 		ft_putstr(GREEN);

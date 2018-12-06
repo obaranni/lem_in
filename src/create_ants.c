@@ -1,6 +1,14 @@
-//
-// Created by Oleksandr Barannik on 12/5/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_ants.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 14:41:36 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 14:41:37 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 
@@ -17,7 +25,7 @@ static t_ant		*create_ant(int id)
 
 void				create_ants(int quantity, t_pack *pack)
 {
-	int 			i;
+	int				i;
 	t_ant			*head;
 
 	i = 0;

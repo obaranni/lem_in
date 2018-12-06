@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_file.c                                         :+:      :+:    :+:   */
+/*   is_enough_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/06 14:54:47 by obaranni          #+#    #+#             */
-/*   Updated: 2018/12/06 14:55:22 by obaranni         ###   ########.fr       */
+/*   Created: 2018/12/06 15:00:12 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 15:00:28 by obaranni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 
-t_fd			*create_fd(void)
+int		is_enough_data(t_lem *l)
 {
-	t_fd		*temp;
-
-	temp = (t_fd *)malloc(sizeof(t_fd));
-	*temp = (t_fd){0, NULL, NULL};
-	return (temp);
-}
-
-int				get_file(t_flags *flags, char **av)
-{
-	t_fd		*temp;
-
-	flags->fd = create_fd();
-	temp = flags->fd;
-	while (*av)
-	{
-		temp->file = ft_strdup(*av);
-		av++;
-		if (*av)
-		{
-			temp->next = (t_fd *)malloc(sizeof(t_fd));
-			*temp->next = (t_fd){0, NULL, NULL};
-			temp = temp->next;
-		}
-		flags->files++;
-	}
+	if (!l->read->ants_readed)
+		return (set_error(l->read,
+				"Ants quantity are absent", l->read->i + 1, ERR));
+	else if (!l->start)
+		return (set_error(l->read,
+				"Start room are absent", l->read->i + 1, ERR));
+	else if (!l->end)
+		return (set_error(l->read, "End room are absent", l->read->i + 1, ERR));
 	return (0);
 }

@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reader_links.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 15:18:37 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 15:19:43 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/lem_in.h"
 
-
-int 		is_room_exist(char *name, t_room *room, int from)
+int					is_room_exist(char *name, t_room *room, int from)
 {
-	int 	exist;
-	int 	i;
+	int				exist;
+	int				i;
 
 	i = 1;
 	exist = 0;
@@ -14,18 +25,17 @@ int 		is_room_exist(char *name, t_room *room, int from)
 		{
 			i++;
 			exist = 1;
-			break;
+			break ;
 		}
 		i++;
 		room = room->next;
 	}
 	return (i * exist);
-
 }
 
-int 		invalid_rooms(char *n1, char *n2, t_lem *l, int set_err)
+int					invalid_rooms(char *n1, char *n2, t_lem *l, int set_err)
 {
-	char 	*err;
+	char			*err;
 
 	if (!is_room_exist(n1, l->head, 1))
 		err = ft_strjoin("There are no rooms with name: ", n1);
@@ -66,9 +76,8 @@ int					is_it_link(t_lem *l, t_read *r)
 	return (0);
 }
 
-t_room		*find_room_byname(t_room *room, char *name)
+t_room				*find_room_byname(t_room *room, char *name)
 {
-
 	while (room)
 	{
 		if (!ft_strcmp(room->name, name))
@@ -78,12 +87,12 @@ t_room		*find_room_byname(t_room *room, char *name)
 	return (NULL);
 }
 
-int 		invalid_link(t_lem *l)
+int					invalid_link(t_lem *l)
 {
 	if (!is_it_link(l, l->read))
 		return (set_error(l->read, "Invalid link", l->read->i + 1, ERR));
-
-	link_rooms(find_room_byname(l->head, l->read->l_r1),find_room_byname(l->head, l->read->l_r2));
+	link_rooms(find_room_byname(l->head, l->read->l_r1),
+		find_room_byname(l->head, l->read->l_r2));
 	free(l->read->l_r1);
 	free(l->read->l_r2);
 	return (0);

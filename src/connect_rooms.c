@@ -1,6 +1,14 @@
-//
-// Created by Oleksandr Barannik on 11/29/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   connect_rooms.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 14:41:10 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 14:41:12 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 
@@ -15,7 +23,7 @@ void		append_neigh(t_room *main, t_room *to_append)
 	if (main->neighbors == 0)
 	{
 		main->neighbors = new;
-		return;
+		return ;
 	}
 	tmp = main->neighbors;
 	while (tmp->next)

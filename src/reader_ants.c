@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reader_ants.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 15:17:57 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 15:18:16 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/lem_in.h"
 
-int 		is_it_ants(t_read *r)
+int			is_it_ants(t_read *r)
 {
-	char 	*box;
+	char	*box;
 
 	box = r->buf;
 	if (r->buf && *r->buf)
@@ -17,22 +29,6 @@ int 		is_it_ants(t_read *r)
 	return (1);
 }
 
-short int			ft_pwrbase(ssize_t num, int base)
-{
-	short int		counter;
-
-	base = (!base) ? 10 : base;
-	counter = 1;
-	if (num < 0 || base < 0)
-		counter++;
-	if (num == base && base < 10)
-		return (counter);
-	while ((num /= base))
-		counter++;
-	return (counter);
-}
-
-
 int			read_ants(t_read *r)
 {
 	if (r->ants_readed)
@@ -41,7 +37,7 @@ int			read_ants(t_read *r)
 		return (0);
 	}
 	r->ants_readed = (unsigned int)ft_atoi(r->buf);
-	if (ft_strlen(r->buf) != ft_pwrbase(r->ants_readed, 10))
+	if (ft_strlen(r->buf) != (size_t)ft_pwrbase(r->ants_readed, 10))
 	{
 		set_error(r, "Too many ants!", r->i + 1, ERR);
 		return (0);

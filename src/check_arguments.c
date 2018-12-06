@@ -1,42 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_arguments.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 15:48:31 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 15:48:32 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/lem_in.h"
 
 int				get_flags_help3(t_flags *flags, char **av)
 {
 	if (ft_strcmp(*av, "-p") == 0)
 		flags->packages = 1;
-	else if (ft_strcmp(*av, "-a") == 0)// Рыба
+	else if (ft_strcmp(*av, "-a") == 0)
 		flags->ants = 1;
-	else if (ft_strcmp(*av, "-w") == 0)// Рыба
+	else if (ft_strcmp(*av, "-w") == 0)
 		flags->ways = 1;
-	else if (ft_strcmp(*av, "-i") == 0)// Рыба
+	else if (ft_strcmp(*av, "-i") == 0)
 		flags->info = 1;
-	else if (ft_strcmp(*av, "-v") == 0)// Рыба
+	else if (ft_strcmp(*av, "-v") == 0)
 		flags->vis = 1;
-	else if (ft_strcmp(*av, "-b") == 0)// Рыба
+	else if (ft_strcmp(*av, "-b") == 0)
 		flags->bad_cases = 1;
-	else if (ft_strcmp(*av, "-c") == 0)// Рыба
+	else if (ft_strcmp(*av, "-c") == 0)
 		flags->color = 1;
-	return (0);
+	else
+		return (0);
+	return (1);
 }
-
 
 int				get_flags_help2(t_flags *flags, char **av)
 {
 	if (**av == 'p')
-		return(flags->packages = 1);
+		flags->packages = 1;
 	else if (**av == 'a')
-		return(flags->ants = 1);
+		flags->ants = 1;
 	else if (**av == 'w')
-		return(flags->ways = 1);
+		flags->ways = 1;
 	else if (**av == 'i')
-		return(flags->info = 1);
+		flags->info = 1;
 	else if (**av == 'v')
-		return(flags->vis = 1);
+		flags->vis = 1;
 	else if (**av == 'b')
-		return(flags->bad_cases = 1);
+		flags->bad_cases = 1;
 	else if (**av == 'c')
-		return(flags->color = 1);
-	return (0);
+		flags->color = 1;
+	else
+		return (0);
+	return (1);
 }
 
 int				get_flags_help(t_flags *flags, char **av)
@@ -58,7 +73,6 @@ int				get_flags_help(t_flags *flags, char **av)
 		}
 		else
 			return (1);
-		(*av)++;
 	}
 	return (0);
 }
@@ -72,7 +86,7 @@ int				get_flags(t_flags *flags, char **av)
 			av++;
 			continue;
 		}
-		else if ((av + 1) && ft_strcmp(*av, "-f") == 0)// Рыба
+		else if ((av + 1) && ft_strcmp(*av, "-f") == 0)
 		{
 			get_file(flags, av + 1);
 			av++;
@@ -81,7 +95,7 @@ int				get_flags(t_flags *flags, char **av)
 			if ((av + 1) && get_flags_help(flags, av) == 1)
 			{
 				print_usage();
-				exit (WRONG_ARGUMENTS);
+				exit(WRONG_ARGUMENTS);
 			}
 		av++;
 	}
@@ -95,7 +109,7 @@ int				check_arguments(t_flags *flags, char **av, int ac)
 	else if (ac > 2)
 	{
 		print_usage();
-		exit (WRONG_ARGUMENTS);
+		exit(WRONG_ARGUMENTS);
 	}
 	if (flags->fd == NULL)
 	{

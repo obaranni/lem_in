@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 15:14:22 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 15:15:21 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/lem_in.h"
 
 void			print_package_info(t_lem *l, int total_steps)
@@ -13,11 +25,10 @@ void			print_package_info(t_lem *l, int total_steps)
 void			print_packages(t_lem *l, t_pack *packages)
 {
 	t_pack		*tmp_p;
-	int 		i;
+	int			i;
 
 	i = 0;
 	tmp_p = packages;
-
 	while (tmp_p)
 	{
 		if (l->flags.color)
@@ -25,7 +36,8 @@ void			print_packages(t_lem *l, t_pack *packages)
 		ft_putstr("\n***** Package ");
 		ft_putnbr(i + 1);
 		ft_putendl(" *****");
-		print_ways(l, tmp_p->ants_on_ways, tmp_p->ways_capacity, tmp_p->parallel_ways);
+		print_ways(l, tmp_p->ants_on_ways, tmp_p->ways_capacity,
+				tmp_p->parallel_ways);
 		print_package_info(l, tmp_p->total_steps);
 		if (l->flags.color)
 			ft_putstr(L_BLUE);

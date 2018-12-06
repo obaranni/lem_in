@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   inits.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 14:58:58 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 14:59:00 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/lem_in.h"
 
-void        init_flags(t_flags *flags)
+void		init_flags(t_flags *flags)
 {
 	flags->vis = 0;
 	flags->bad_cases = 0;
@@ -8,6 +20,7 @@ void        init_flags(t_flags *flags)
 	flags->ants = 0;
 	flags->info = 0;
 	flags->ways = 0;
+	flags->color = 0;
 	flags->files = 0;
 	flags->fd = NULL;
 }

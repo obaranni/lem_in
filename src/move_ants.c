@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_ants.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 15:08:21 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 15:10:01 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/lem_in.h"
 
-int 				is_room_busy(char *name, t_ant *ants)
+int					is_room_busy(char *name, t_ant *ants)
 {
 	while (ants)
 	{
@@ -13,7 +25,7 @@ int 				is_room_busy(char *name, t_ant *ants)
 
 void				move_ants(t_lem *l)
 {
-	int 			ants_finished;
+	unsigned int	ants_finished;
 	t_ant			*ant;
 	t_pack			*pack;
 
@@ -24,7 +36,9 @@ void				move_ants(t_lem *l)
 		ant = pack->ants;
 		while (ant)
 		{
-			if (ant->way->next && (!ft_strcmp(ant->way->next->name, l->end->name) || !is_room_busy(ant->way->next->name, pack->ants)))
+			if (ant->way->next &&
+				(!ft_strcmp(ant->way->next->name, l->end->name)
+				|| !is_room_busy(ant->way->next->name, pack->ants)))
 			{
 				ant->way = ant->way->next;
 				print_ant_step(l, ant);

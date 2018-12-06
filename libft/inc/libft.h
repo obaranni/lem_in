@@ -6,7 +6,7 @@
 /*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 13:25:07 by obaranni          #+#    #+#             */
-/*   Updated: 2018/08/02 15:43:17 by obaranni         ###   ########.fr       */
+/*   Updated: 2018/12/06 13:20:00 by obaranni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void				ft_memdel(void **ap);
 char				*ft_strnew(size_t size);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
-int 				lgnl(int fd, char **line);
+int					lgnl(int fd, char **line);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strmap(char const *s, char (*f)(char));
@@ -71,7 +71,6 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
-//char				**ft_strsplit(char const *s, char c);
 char				**ft_strsplit(const char *string, char c, int code);
 typedef struct		s_list
 {

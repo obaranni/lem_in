@@ -6,7 +6,7 @@
 #    By: obaranni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/27 15:44:29 by obaranni          #+#    #+#              #
-#    Updated: 2018/12/05 20:43:48 by obaranni         ###   ########.fr        #
+#    Updated: 2018/12/06 16:25:13 by obaranni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,28 +23,36 @@ LIB_DIR = ./libft/
 LIBFT = $(LIB_DIR)libft.a
 
 SRC =		lem_in.c					\
-			add_room.c				\
-			reader.c				\
-			free.c					\
+			add_room.c					\
+			reader.c					\
+			free.c						\
+			free2.c						\
 			reader_links.c				\
-			set_error.c				\
+			set_error.c					\
 			reader_ants.c				\
-			bfs.c					\
+			bfs.c						\
 			connect_rooms.c				\
 			create_packages.c			\
 			check_arguments.c			\
-			get_file.c				\
-			print.c					\
-			print2.c				\
-			print3.c				\
+			get_file.c					\
+			print.c						\
+			print2.c					\
+			print3.c					\
 			get_best_package.c			\
 			create_ants.c				\
-			move_ants.c				\
+			move_ants.c					\
 			set_ants_on_ways.c			\
-			set_packages_capacity.c			\
+			set_packages_capacity.c		\
 			ants_preparation.c			\
-			package_preparation.c			\
-			inits.c					\
+			package_preparation.c		\
+			inits.c						\
+			work_with_packages.c		\
+			work_with_room_functions.c	\
+			work_with_way_functions.c	\
+			help_functions.c			\
+			is_enough_data.c			\
+			is_it_error.c				\
+			room_validate.c				\
 			reader_room.c				
 
 OBJ = $(SRC:.c=.o)
@@ -54,7 +62,7 @@ SRC_FILES =	$(addprefix $(SRC_DIR),$(SRC))
 OBJ_FILES =	$(addprefix $(OBJ_DIR),$(OBJ))
 
 
-COMPALING_FLAGS = -I$(INC_DIR) -I$(LIB_DIR)# `pkg-config --cflags gtk+-3.0`
+COMPALING_FLAGS = -I$(INC_DIR) -I$(LIB_DIR) -Wall -Wextra -Werror # `pkg-config --cflags gtk+-3.0`
 
 LINKING_FLAGS = -framework opengl -framework appkit -lft -L$(LIB_DIR) # -lmlx -L minilibx_macos `pkg-config --libs --cflags gtk+-3.0`
 

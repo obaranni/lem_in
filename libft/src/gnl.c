@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lgnl.c                                             :+:      :+:    :+:   */
+/*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ariabyi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 10:41:18 by ariabyi           #+#    #+#             */
-/*   Updated: 2018/11/20 10:41:30 by ariabyi          ###   ########.fr       */
+/*   Created: 2018/12/06 13:27:03 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 13:27:05 by obaranni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <string.h>
 
-
-static char            *append_char(char **s, char c)
+static char			*append_char(char **s, char c)
 {
-	char            *temp;
-	size_t            len;
+	char			*temp;
+	size_t			len;
 
 	if (!*s)
 	{
@@ -38,9 +34,9 @@ static char            *append_char(char **s, char c)
 	return (temp);
 }
 
-int                    lgnl(int fd, char **line)
+int					lgnl(int fd, char **line)
 {
-	char            buf;
+	char			buf;
 
 	if (fd < 0 || !line)
 		return (-1);

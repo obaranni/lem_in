@@ -1,8 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obaranni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/06 15:11:01 by obaranni          #+#    #+#             */
+/*   Updated: 2018/12/06 15:12:24 by obaranni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/lem_in.h"
+
+void			print_spaces(int num)
+{
+	while (num--)
+		ft_putchar(' ');
+}
 
 void			print_way_info(t_room *way, int ants, float cap)
 {
 	ft_putstr("id: ");
+	print_spaces(5 - ft_pwrbase(way->way_id, 10));
 	ft_putnbr(way->way_id);
 	if (cap > 0.0)
 	{
@@ -43,7 +62,7 @@ void			print_way(t_lem *l, int ants, float cap, t_room *way)
 		ft_putstr(MAGENTA);
 }
 
-void 			print_ways_info(t_lem *l, int i)
+void			print_ways_info(t_lem *l, int i)
 {
 	if (l->flags.color)
 		ft_putstr(YELLOW);
@@ -58,11 +77,11 @@ void 			print_ways_info(t_lem *l, int i)
 
 void			print_ways(t_lem *l, int *ants, float *cap, t_room **ways)
 {
-	int 		i;
+	int			i;
 
 	i = 0;
 	if (!ways)
-		return;
+		return ;
 	if (l->flags.color)
 		ft_putstr(YELLOW);
 	ft_putendl("Ways:");
