@@ -33,15 +33,18 @@ SRC =		lem_in.c					\
 			connect_rooms.c				\
 			create_packages.c			\
 			check_arguments.c			\
+			get_file.c				\
 			print.c					\
+			print2.c				\
+			print3.c				\
 			get_best_package.c			\
 			create_ants.c				\
-			move_ants.c					\
+			move_ants.c				\
 			set_ants_on_ways.c			\
-			set_packages_capacity.c		\
+			set_packages_capacity.c			\
 			ants_preparation.c			\
-			package_preparation.c		\
-			inits.c						\
+			package_preparation.c			\
+			inits.c					\
 			reader_room.c				
 
 OBJ = $(SRC:.c=.o)

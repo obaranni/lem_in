@@ -1,6 +1,6 @@
 #include "../inc/lem_in.h"
 
-void			print_way(t_lem *l, int ants, float cap, t_room *way)
+void			print_way_info(t_room *way, int ants, float cap)
 {
 	ft_putstr("id: ");
 	ft_putnbr(way->way_id);
@@ -20,6 +20,14 @@ void			print_way(t_lem *l, int ants, float cap, t_room *way)
 	else
 		ft_putchar('0');
 	ft_putstr(" | ");
+}
+
+void			print_way(t_lem *l, int ants, float cap, t_room *way)
+{
+	if (l->flags.info)
+		print_way_info(way, ants, cap);
+	if (l->flags.color)
+		ft_putstr(YELLOW);
 	while (way)
 	{
 		if (way->next)
@@ -31,6 +39,21 @@ void			print_way(t_lem *l, int ants, float cap, t_room *way)
 			ft_putendl(way->name);
 		way = way->next;
 	}
+	if (l->flags.color)
+		ft_putstr(MAGENTA);
+}
+
+void 			print_ways_info(t_lem *l, int i)
+{
+	if (l->flags.color)
+		ft_putstr(YELLOW);
+	ft_putstr("\nWays counter: ");
+	if (l->flags.color)
+		ft_putstr(MAGENTA);
+	ft_putnbr(i);
+	if (l->flags.color)
+		ft_putstr(RESET);
+	ft_putchar('\n');
 }
 
 void			print_ways(t_lem *l, int *ants, float *cap, t_room **ways)
@@ -40,7 +63,11 @@ void			print_ways(t_lem *l, int *ants, float *cap, t_room **ways)
 	i = 0;
 	if (!ways)
 		return;
+	if (l->flags.color)
+		ft_putstr(YELLOW);
 	ft_putendl("Ways:");
+	if (l->flags.color)
+		ft_putstr(MAGENTA);
 	while (ways[i])
 	{
 		if (cap)
@@ -49,56 +76,5 @@ void			print_ways(t_lem *l, int *ants, float *cap, t_room **ways)
 			print_way(l, 0, 0, ways[i]);
 		i++;
 	}
-	ft_putchar('\n');
-	ft_putstr("Ways counter: ");
-	ft_putnbr(i);
-	ft_putchar('\n');
-}
-
-void			print_packages(t_lem *l, t_pack *packages)
-{
-	t_pack		*tmp_p;
-	int 		i;
-
-	i = 0;
-	tmp_p = packages;
-	if (l->flags.color)
-		ft_putstr(MAGENTA);
-	while (tmp_p)
-	{
-		ft_putstr("\n***** Package ");
-		ft_putnbr(i + 1);
-		ft_putendl(" *****");
-		print_ways(l, tmp_p->ants_on_ways, tmp_p->ways_capacity, tmp_p->parallel_ways);
-		ft_putstr("Steps to perform: ");
-		ft_putnbr(tmp_p->total_steps);
-		ft_putendl("\n********************\n");
-		tmp_p = tmp_p->next;
-		i++;
-	}
-	if (l->flags.color)
-		ft_putstr(RESET);
-}
-
-void			print_ants(t_lem *l, t_ant *ant)
-{
-	while (ant)
-	{
-		ft_putstr("\n***** ANT ");
-		ft_putnbr(ant->id + 1);
-		ft_putendl(" *****");
-		ft_putstr("Ant way: ");
-		ft_putnbr(ant->way->way_id);
-		ft_putendl("\n*****************\n");
-		ant = ant->next;
-	}
-}
-
-void				print_ant_step(t_lem *l, t_ant *ant)
-{
-	ft_putchar('L');
-	ft_putnbr(ant->id + 1);
-	ft_putchar('-');
-	ft_putstr(ant->way->name);
-	ft_putchar(' ');
+	print_ways_info(l, i);
 }

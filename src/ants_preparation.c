@@ -30,6 +30,6 @@ void			prepare_ants(t_lem *l)
 	pack = get_best_package(l->packages);
 	create_ants(l->read->ants_readed, pack);
 	set_ants_on_ways(pack);
-	if (l->flags.print && l->flags.bad_cases)
+	if (l->flags.ants)
 		print_ants(l, pack->ants);
 }

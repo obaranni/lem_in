@@ -231,12 +231,12 @@ int				find_ways(t_lem *l)
 		BFS(l->ways[i], l);
 		i++;
 	}
-	if (l->flags.print && l->flags.bad_cases)
+	if (l->flags.ways && l->flags.bad_cases)
 		print_ways(l, 0, 0, l->ways);
 	remove_bad_ways(l);
 	if (!l->ways[0])
 		return (set_error(l->read, "The Start and End rooms are not connected", l->read->i, ERR));
-	if (l->flags.print)
+	if (l->flags.ways)
 		print_ways(l, 0, 0, l->ways);
 
 

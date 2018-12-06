@@ -42,6 +42,9 @@
 # define RESET            "\x1b[0m"
 # define MAGENTA        "\x1b[35m"
 # define CYAN            "\x1b[36m"
+# define GREEN			"\x1b[32m"
+# define YELLOW			"\x1b[33m"
+# define L_GREEN		"\x1b[92m"
 # define L_RED            "\x1b[91m"
 # define L_BLUE            "\x1b[94m"
 # define L_MAGENTA        "\x1b[95m"
@@ -118,7 +121,10 @@ typedef struct		s_fd
 
 typedef struct		s_flags
 {
-	unsigned 		print:1;
+	unsigned 		packages:1;
+	unsigned		ants:1;
+	unsigned 		ways:1;
+	unsigned 		info:1;
 	unsigned		vis:1;
 	unsigned		bad_cases:1;
 	unsigned		color:1;
@@ -150,6 +156,8 @@ void				reader_init(t_lem *l);
 ** Check arguments
 */
 
+t_fd				*create_fd(void);
+int					get_file(t_flags *flags, char **av);
 int					check_arguments(t_flags *flags, char **av, int ac);
 
 /*
@@ -240,6 +248,10 @@ void				move_ants(t_lem *l);
 **	 Print functions
 */
 
+void				print_usage(void);
+void				print_error(t_err *error);
+void				print_header(t_lem *l);
+void				print_footer(t_lem *l);
 void				print_ant_step(t_lem *l, t_ant *ant);
 void				print_ants(t_lem *l, t_ant *ant);
 void				print_way(t_lem *l, int ants, float cap, t_room *way);
