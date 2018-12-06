@@ -39,5 +39,11 @@ int				get_file(t_flags *flags, char **av)
 		}
 		flags->files++;
 	}
+	if (flags->fd == NULL || flags->fd->file == NULL)
+	{
+		free(flags->fd);
+		print_error_msg(flags, "There are no files!\n");
+		exit(WRONG_ARGUMENTS);
+	}
 	return (0);
 }
