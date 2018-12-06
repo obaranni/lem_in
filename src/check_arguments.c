@@ -28,6 +28,8 @@ int				get_flags_help3(t_flags *flags, char **av)
 		flags->bad_cases = 1;
 	else if (ft_strcmp(*av, "-c") == 0)
 		flags->color = 1;
+	else if (ft_strcmp(*av, "-o") == 0)
+		flags->outline = 1;
 	else
 		return (0);
 	return (1);
@@ -49,6 +51,8 @@ int				get_flags_help2(t_flags *flags, char **av)
 		flags->bad_cases = 1;
 	else if (**av == 'c')
 		flags->color = 1;
+	else if (**av == 'o')
+		flags->outline = 1;
 	else
 		return (0);
 	return (1);
@@ -94,7 +98,7 @@ int				get_flags(t_flags *flags, char **av)
 		else if (*(*av) == '-')
 			if ((av + 1) && get_flags_help(flags, av) == 1)
 			{
-				print_usage();
+				print_error_msg(flags, "Usage: ./lem-in -[cowpabfiv] < map\n");
 				exit(WRONG_ARGUMENTS);
 			}
 		av++;
@@ -108,7 +112,7 @@ int				check_arguments(t_flags *flags, char **av, int ac)
 		get_flags(flags, (av + 1));
 	else if (ac > 2)
 	{
-		print_usage();
+		print_error_msg(flags, "Usage: ./lem-in -[cowpabfiv] < map\n");
 		exit(WRONG_ARGUMENTS);
 	}
 	if (flags->fd == NULL)

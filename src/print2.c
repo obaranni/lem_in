@@ -12,11 +12,13 @@
 
 #include "../inc/lem_in.h"
 
-void			print_usage(void)
+void			print_error_msg(t_flags *flags, char *msg)
 {
-	ft_putstr(L_RED);
-	ft_putstr_fd("Usage: ./lem-in -[pabviwfc] < map\n", 2);
-	ft_putstr(RESET);
+	if (flags->color)
+		ft_putstr(L_RED);
+	ft_putstr_fd(msg, 2);
+	if (flags->color)
+		ft_putstr(RESET);
 }
 
 void			print_error(t_err *error)

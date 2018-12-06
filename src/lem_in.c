@@ -41,6 +41,7 @@ int			lem_in(t_lem *l)
 		return (WRONG_INPUT);
 	if (try_find_ways(l))
 		return (WRONG_WAYS);
+	print_outline(l);
 	prepare_packages(l);
 	prepare_ants(l);
 	move_ants(l);
@@ -60,6 +61,8 @@ int			main(int ac, char **av)
 		if (l.flags.fd->file && (l.flags.fd->fd =
 				open(l.flags.fd->file, O_RDONLY)) == -1)
 		{
+			print_error_msg(&l.flags, l.flags.fd->file);
+			print_error_msg(&l.flags, " does not exist!\n\n");
 			free_all(&l);
 			continue ;
 		}

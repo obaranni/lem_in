@@ -31,7 +31,6 @@
 # define END_R				2
 # define MAX_NAME_R			11
 
-# define WAR				1
 # define ERR				2
 
 # define NOT_PROCESSED		0
@@ -47,7 +46,6 @@
 # define L_GREEN			"\x1b[92m"
 # define L_RED				"\x1b[91m"
 # define L_BLUE				"\x1b[94m"
-# define L_MAGENTA			"\x1b[95m"
 
 typedef struct s_room	t_room;
 typedef struct s_neigh	t_neigh;
@@ -124,6 +122,7 @@ typedef struct			s_flags
 	unsigned			packages:1;
 	unsigned			ants:1;
 	unsigned			ways:1;
+	unsigned			outline:1;
 	unsigned			info:1;
 	unsigned			vis:1;
 	unsigned			bad_cases:1;
@@ -273,8 +272,9 @@ int						is_crossed_room(t_neigh *neigh, t_room *way);
 **	 Print functions
 */
 
+void					print_outline(t_lem *l);
 short					ft_pwrbase(ssize_t num, int base);
-void					print_usage(void);
+void					print_error_msg(t_flags *flags, char *msg);
 void					print_error(t_err *error);
 void					print_header(t_lem *l);
 void					print_footer(t_lem *l);

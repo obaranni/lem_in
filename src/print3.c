@@ -12,6 +12,19 @@
 
 #include "../inc/lem_in.h"
 
+void			print_outline(t_lem *l)
+{
+	if (!l->flags.outline)
+		return ;
+	if (l->flags.color)
+		ft_putstr(CYAN);
+	ft_putchar('\n');
+	ft_putstr(l->read->input);
+	ft_putchar('\n');
+	if (l->flags.color)
+		ft_putstr(RESET);
+}
+
 void			print_package_info(t_lem *l, int total_steps)
 {
 	if (l->flags.color)
