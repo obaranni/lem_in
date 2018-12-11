@@ -38,7 +38,7 @@ void			print_header(t_lem *l)
 {
 	if (l->flags.color)
 		ft_putstr(L_GREEN);
-	ft_putstr("Input sources: ");
+	ft_putstr("\n\nInput sources: ");
 	if (l->flags.fd->file)
 		ft_putendl(l->flags.fd->file);
 	else
@@ -56,8 +56,7 @@ void			print_footer(t_lem *l)
 	if (l->flags.fd->file)
 		ft_putendl(l->flags.fd->file);
 	else
-		ft_putstr("manual");
-	ft_putstr("\n\n");
+		ft_putendl("manual");
 	if (l->flags.color)
 		ft_putstr(RESET);
 }

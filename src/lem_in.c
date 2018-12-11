@@ -37,17 +37,74 @@ int			try_find_ways(t_lem *l)
 
 int			lem_in(t_lem *l)
 {
+	struct timespec tstart, tend;
+
+
+	tstart.tv_nsec = 0;
+	tstart.tv_sec = 0;
+	tend.tv_nsec = 0;
+	tend.tv_sec = 0;
+	clock_gettime(CLOCK_MONOTONIC, &tstart);
 	if (try_read(l))
 		return (WRONG_INPUT);
+	clock_gettime(CLOCK_MONOTONIC, &tend);
+	printf("reading took about %.5f seconds\n",
+		   ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) -
+		   ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec));
+
+
+	tstart.tv_nsec = 0;
+	tstart.tv_sec = 0;
+	tend.tv_nsec = 0;
+	tend.tv_sec = 0;
+	clock_gettime(CLOCK_MONOTONIC, &tstart);
 	if (try_find_ways(l))
 		return (WRONG_WAYS);
+	clock_gettime(CLOCK_MONOTONIC, &tend);
+	printf("ways finding took about %.5f seconds\n",
+		   ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) -
+		   ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec));
+
 	print_outline(l);
+
+	tstart.tv_nsec = 0;
+	tstart.tv_sec = 0;
+	tend.tv_nsec = 0;
+	tend.tv_sec = 0;
+	clock_gettime(CLOCK_MONOTONIC, &tstart);
 	prepare_packages(l);
+	clock_gettime(CLOCK_MONOTONIC, &tend);
+	printf("pack preparing took about %.5f seconds\n",
+		   ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) -
+		   ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec));
+
+
+	tstart.tv_nsec = 0;
+	tstart.tv_sec = 0;
+	tend.tv_nsec = 0;
+	tend.tv_sec = 0;
+	clock_gettime(CLOCK_MONOTONIC, &tstart);
 	prepare_ants(l);
+	clock_gettime(CLOCK_MONOTONIC, &tend);
+	printf("ants preparing took about %.5f seconds\n",
+		   ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) -
+		   ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec));
+
+
+	tstart.tv_nsec = 0;
+	tstart.tv_sec = 0;
+	tend.tv_nsec = 0;
+	tend.tv_sec = 0;
+	clock_gettime(CLOCK_MONOTONIC, &tstart);
 	move_ants(l);
+	clock_gettime(CLOCK_MONOTONIC, &tend);
+	printf("ants moving took about %.5f seconds\n",
+		   ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) -
+		   ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec));
 	return (0);
 }
-
+// TODO: invalid links like start-1-1-1-1-1 should be fixed
+// TODO: put all print calls into one function witch should be called after moving ants (except ants moving)
 int			main(int ac, char **av)
 {
 	t_lem	l;

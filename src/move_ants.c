@@ -41,12 +41,14 @@ void				move_ants(t_lem *l)
 				|| !is_room_busy(ant->way->next->name, pack->ants)))
 			{
 				ant->way = ant->way->next;
-				print_ant_step(l, ant);
+				if (l->flags.steps)
+					print_ant_step(l, ant);
 				if (!ft_strcmp(ant->way->name, l->end->name))
 					ants_finished++;
 			}
 			ant = ant->next;
 		}
-		ft_putchar('\n');
+		if (l->flags.steps)
+			ft_putchar('\n');
 	}
 }

@@ -19,6 +19,16 @@ void			bfs(t_room *start, t_lem *l)
 	t_room		*last_room;
 	t_room		*new_way;
 
+	struct timespec tstart, tend;
+
+
+	tstart.tv_nsec = 0;
+	tstart.tv_sec = 0;
+	tend.tv_nsec = 0;
+	tend.tv_sec = 0;
+	clock_gettime(CLOCK_MONOTONIC, &tstart);
+
+
 	last_room = get_last_room(start);
 	if (last_room->is_processed == PROCESSED)
 		return ;
@@ -38,6 +48,11 @@ void			bfs(t_room *start, t_lem *l)
 		upend_way(&l->ways, new_way);
 		neigh = neigh->next;
 	}
+
+	clock_gettime(CLOCK_MONOTONIC, &tend);
+	printf("one way preparing took about %.5f seconds\n",
+		   ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) -
+		   ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec));
 }
 
 void			remove_bad_ways(t_lem *l)

@@ -15,6 +15,7 @@
 # include "../libft/inc/libft.h"
 # include "../libft/inc/get_next_line.h"
 # include <stdio.h>
+# include <time.h>
 # include "stdlib.h"
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -119,6 +120,7 @@ typedef struct			s_fd
 
 typedef struct			s_flags
 {
+	unsigned			steps:1;
 	unsigned			packages:1;
 	unsigned			ants:1;
 	unsigned			ways:1;

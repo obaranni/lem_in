@@ -20,6 +20,7 @@ void		init_flags(t_flags *flags)
 	flags->ants = 0;
 	flags->info = 0;
 	flags->ways = 0;
+	flags->steps = 0;
 	flags->outline = 0;
 	flags->color = 0;
 	flags->files = 0;
